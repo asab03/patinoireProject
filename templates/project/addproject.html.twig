@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjectController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ app.user.firstName }} ! ✅</h1>
+
+   <div class='array'>
+    <!-- The above form looks like this -->
+    <form action="/project/add/save" method="POST">
+      <div class="row">
+        <div class="column">
+          <label for="title">Titre</label>
+          <input class="u-full-width input" type="text" id="title" name="title">
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <label for="description">Description</label>
+          <textarea class="u-full-width input" type="text" id="description" name="description"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <label for="date_in">Start date</label>
+          <input class="u-full-width input" type="date" id="date_in" name="date_in" placeholder="jj/mm/aaaa">
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <label for="date_out">End date</label>
+          <input class="u-full-width input" type="date" id="date_out" name="date_out" placeholder="jj/mm/aaaa">
+        </div>
+      </div>
+      <a class="button button-primary" href="{{ path('home') }}">Cancel</a>
+      <input class="button-primary " type="submit" value="Save">
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

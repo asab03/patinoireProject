@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title}}{% endblock %}
+
+{% block body %}
+    <h1>{{ project.Title }}</h1>
+
+    <table class="table">
+        <tbody>
+            
+                        <tr>
+                <th>Description</th>
+                <td>{{ document.title }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{document.getDate|date("d M Y")}}</td>
+            </tr>
+            <tr>
+                <th>document</th>
+                <td>{{ document.getDocument}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+   
+    
+{% endblock %}

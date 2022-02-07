@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjectController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Projects {{ app.user.firstName }} ! ✅</h1>
+
+  <div>
+    <h1>Vos Projets</h1>
+    <a href="{{ path('project_add') }}">Créer un nouveau projet</a>
+     {% for project in app.user.projects %}
+        <h2>{{project.getTitle}}</h2>
+        <p>{{project.getDescription}}</p>
+        <p>{{project.getDateIn|date("d M Y")}}</p>
+        <p>{{project.getDateOut|date("d M Y")}}</p>
+        <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
+     {% endfor %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title}}{% endblock %}
+
+{% block body %}
+    <h1>{{ project.Title }}</h1>
+
+    <table class="table">
+        <tbody>
+            
+            
+           
+            <tr>
+                <th>Description</th>
+                <td>{{ project.Description }}</td>
+            </tr>
+            <tr>
+                <th>Date de début</th>
+                <td>{{project.getDateIn|date("d M Y")}}</td>
+            </tr>
+            <tr>
+                <th>Date de fin</th>
+                <td>{{ project.getDateOut|date("d M Y") }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
+    <a href="{{ path('projects_addUser', {'id': project.id}) }}">Ajouter participant</a>
+
+    <div>
+
+    <h3>Depot de documents</h3>
+    <a href="{{ path('projects_document', {'id': project.id}) }}">Voir</a>
+    <h3>Dépense</h3>
+    <a href="{{ path('projects_expense', {'id': project.id}) }}">ici</a>
+    <h3>Messagerie</h3>
+    <a href="{{ path('document', {'id': project.id}) }}">ici</a>
+    </div>
+
+    
+{% endblock %}
