@@ -28,6 +28,10 @@
                         {{ form_label(form.last_name) }}
                         {{ form_widget(form.last_name) }}
                 </div>
+                <div >
+                        {{ form_label(form.profil_picture) }}
+                        {{ form_widget(form.profil_picture) }}
+                </div>
         </div>
         <button class="btn ">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

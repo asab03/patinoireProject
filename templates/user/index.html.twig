@@ -3,7 +3,8 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>Liste des Utilisateurs</h1>
+<div>
+    <h2>Liste des Utilisateurs</h2>
 
     <table class="table">
         <thead>
@@ -35,11 +36,49 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">Aucun utilisateur trouvé</td>
+                <td colspan="8">Aucun utilisateurs trouvés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('user_new') }}">Nouvel utilisateur</a>
+    </div>
+    <div>
+        <h2>Liste des Projets</h2>
+
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date de debut</th>
+                <th>Date de Fin</th>
+                
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.id }}</td>
+                <td>{{ project.title }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.getDateIn|date("d-M-Y")}}</td>
+                <td>{{ project.getDateOut|date("d-M-Y") }}</td>
+                
+                <td>
+                    <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
+                    <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun projects trouvés</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
 {% endblock %}

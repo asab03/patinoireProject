@@ -69,17 +69,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $chatMessages;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Expense::class, mappedBy="debiteur", cascade={"persist"})
-     */
-    private $debitExpenses;
-
+    
     public function __construct()
     {
         $this->projects = new ArrayCollection();
         $this->expenses = new ArrayCollection();
         $this->chatMessages = new ArrayCollection();
         $this->debitExpenses = new ArrayCollection();
+    }
+    public function __toString() 
+    {
+        return $this->first_name;
     }
 
     public function getId(): ?int
@@ -294,30 +294,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Expense[]
-     */
-    public function getDebitExpenses(): Collection
-    {
-        return $this->debitExpenses;
-    }
-
-    public function addDebitExpense(Expense $debitExpense): self
-    {
-        if (!$this->debitExpenses->contains($debitExpense)) {
-            $this->debitExpenses[] = $debitExpense;
-            $debitExpense->addDebiteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDebitExpense(Expense $debitExpense): self
-    {
-        if ($this->debitExpenses->removeElement($debitExpense)) {
-            $debitExpense->removeDebiteur($this);
-        }
-
-        return $this;
-    }
 }

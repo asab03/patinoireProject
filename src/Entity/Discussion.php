@@ -20,12 +20,13 @@ class Discussion
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Project::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Project::class, cascade={"persist", "remove"},inversedBy="discussion")
      */
     private $project;
 
     /**
      * @ORM\OneToMany(targetEntity=ChatMessage::class, mappedBy="discussion", orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $chatMessages;
 
@@ -54,12 +55,12 @@ class Discussion
     /**
      * @return Collection|ChatMessage[]
      */
-    public function getChatMessages(): Collection
+    public function getChatMessages(): ?Collection
     {
         return $this->chatMessages;
     }
 
-    public function addChatMessage(ChatMessage $chatMessage): self
+    public function addChatMessage(?ChatMessage $chatMessage): self
     {
         if (!$this->chatMessages->contains($chatMessage)) {
             $this->chatMessages[] = $chatMessage;
@@ -69,7 +70,7 @@ class Discussion
         return $this;
     }
 
-    public function removeChatMessage(ChatMessage $chatMessage): self
+    public function removeChatMessage(?ChatMessage $chatMessage): self
     {
         if ($this->chatMessages->removeElement($chatMessage)) {
             // set the owning side to null (unless already changed)

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Expense{% endblock %}
+
+{% block body %}
+    <h1>Edit {{expense.getTitle}} </h1>
+
+    <form action="/project/{{projectId}}/expense/{{expenseId}}/save" method="POST">
+      <div class="row">
+        <div class="column">
+          <label for="title">Titre</label>
+          <input class="u-full-width input" type="text" id="title" name="title" value="{{expense.getTitle}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <label for="amount">Montant</label>
+          <input class="u-full-width input" type="text" id="amount" name="amount" value="{{expense.getAmount}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <label for="date">Date</label>
+          <input class="u-full-width input" type="date" id="date" name="date" placeholder="jj/mm/aaaa" value="{{expense.getDate|date("Y-m-d")}}">
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="column">
+          <label for="user">Fait Par</label>
+          <input type="select"  value='{{ expense.getUser}}'  name="user"/>
+            {% for user in project.getUser %}
+              <option value={{ expense.getUser}}>{{user.firstName}}</option>
+            {% endfor %} 
+        </div>
+      </div>
+      
+      
+      <input class="button-primary" type="submit" value="Save">
+      
+      <a class="button btnCancel" href="{{ path('projects_expense', {'id': project.id}) }}">Cancel</a>
+    </form>
+
+    
+
+    
+{% endblock %}

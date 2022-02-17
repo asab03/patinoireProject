@@ -69,12 +69,17 @@ class Project
      * @ORM\OneToMany(targetEntity=Document::class, mappedBy="project")
      */
     private $documents;
+    /**
+     * @ORM\OneToOne(targetEntity=Discussion::class,cascade={"persist"}, mappedBy="project",orphanRemoval=true)
+     */
+    private $discussion;
 
     public function __construct()
     {
         $this->user = new ArrayCollection();
         $this->expenses = new ArrayCollection();
         $this->documents = new ArrayCollection();
+        // $this->discussion = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,4 +239,19 @@ class Project
 
         return $this;
     }
+    /**
+     * @return Discussion|null
+     */
+    public function getDiscussion()
+    {
+        return $this->discussion;
+    }
+
+    public function setDiscussion(Discussion $discussion): self
+    {
+        $this->discussion = $discussion;
+        return $this;
+    }
+
+    
 }

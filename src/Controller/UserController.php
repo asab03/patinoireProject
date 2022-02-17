@@ -5,12 +5,17 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * @Route("/user")
@@ -20,10 +25,13 @@ class UserController extends AbstractController
     /**
      * @Route("/index", name="user_index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, ProjectRepository $projectRepository): Response
     {
+        $projects = $projectRepository-> findAll();
+        
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'projects' => $projects
         ]);
     }
 
@@ -60,20 +68,48 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
+        // $projectRoot = $this->getParameter('kernel.project_dir');
+        // $filename = $user-> getProfilPicture();
+        // return $this->file($projectRoot.'/public/uploads/profilPicture/'.$filename, null, ResponseHeaderBag::DISPOSITION_INLINE);
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager,UserPasswordEncoderInterface $passwordEncoder): Response
+    public function edit(Request $request, User $user,SluggerInterface $slugger, EntityManagerInterface $entityManager,UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('profil_picture')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('image_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $user->setProfilPicture($newFilename);
+            }
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
             $entityManager->flush();
 
@@ -110,5 +146,6 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+    
 
 }

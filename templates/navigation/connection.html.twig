@@ -3,14 +3,17 @@
 {% block title %}Hello NavigationController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div>
-    <h1>Hello ! ✅</h1>
 
-    Merci de vous connecter
+<div class="connexion">
+    
+
+    <h1>Bienvenue sur Voyage, Voyage !</h1>
+    <img src='/img/Voyage_voyage.png' >
+    <h2> Votre espace pour organiser vos sejour en groupe, entre amis ou avec votre famille.</h2>
+
+    <p>Merci de vous connecter</p>
+
+    <a class="button btnCancel" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
 </div>
 {% endblock %}

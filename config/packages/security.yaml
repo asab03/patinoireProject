@@ -40,6 +40,7 @@ security:
     - { path: ^/home, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/logout, roles: ROLE_USER }
     - { path: ^/user, roles: ROLE_USER }
+    - { path: ^/discussion, roles: ROLE_USER }
 
 when@test:
   security:

@@ -35,6 +35,8 @@ class Expense
     private $date;
 
     /**
+     * @var string
+     * 
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="expenses")
      */
     private $user;
@@ -44,10 +46,6 @@ class Expense
      */
     private $project;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=user::class, inversedBy="debitExpenses")
-     */
-    private $debiteur;
 
     public function __construct()
     {
@@ -106,6 +104,7 @@ class Expense
 
         return $this;
     }
+    
 
     public function getProject(): ?Project
     {
@@ -119,27 +118,4 @@ class Expense
         return $this;
     }
 
-    /**
-     * @return Collection|user[]
-     */
-    public function getDebiteur(): Collection
-    {
-        return $this->debiteur;
-    }
-
-    public function addDebiteur(User $debiteur): self
-    {
-        if (!$this->debiteur->contains($debiteur)) {
-            $this->debiteur[] = $debiteur;
-        }
-
-        return $this;
-    }
-
-    public function removeDebiteur(User $debiteur): self
-    {
-        $this->debiteur->removeElement($debiteur);
-
-        return $this;
-    }
 }

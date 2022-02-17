@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+            <link rel="stylesheet" href="/scss/style.css"
+{% endblock %}
 
 {% block title %}{{ user.firstName }}{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <div class="tableShow">
+    <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+    <h2> Vos informations</h2>
 
-    <table class="table">
+    <table >
         <tbody>
             
             <tr>
@@ -14,23 +19,42 @@
             </tr>
            
             <tr>
-                <th>First_name</th>
+                <th>Prenom</th>
                 <td>{{ user.firstName }}</td>
             </tr>
             <tr>
-                <th>Last_name</th>
+                <th>Nom</th>
                 <td>{{ user.lastName }}</td>
             </tr>
             <tr>
-                <th>Profil_picture</th>
-                <td>{{ user.profilPicture }}</td>
+                <th>Image de profil</th>
+                <td>
+                {% if user.getProfilPicture %}
+                    <img src='/uploads/profilPicture/{{ user.profilPicture }}' class="profilPic">
+                {% else %}
+                    <img src='/img/profil.png' class="profilPic">
+                {% endif %}  
+                </td>
             </tr>
         </tbody>
     </table>
 
-    
+    <div>
 
     <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
 
     {{ include('user/_delete_form.html.twig') }}
+    </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="/js/vanilla-tilt.js"></script>
+<script>
+    VanillaTilt.init(document.querySelector(".tableShow"), {
+		max: 15,
+		speed: 100,
+        glare : true,
+        "max-glare": 1,
+	});
+</script>
 {% endblock %}

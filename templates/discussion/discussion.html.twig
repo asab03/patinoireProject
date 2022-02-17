@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DiscussionController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ app.user.firstName }} ! ✅</h1>
+    <h2>{{project.title}}</h2>
+    <div id='chat'>
+    {% for chatMessages in chatMessage %}
+     {% if app.user == chatMessages.user %}
+     <div class="row float-right">  
+         <b>{{chatMessages.user.firstName}} : </b>
+         <p> {{chatMessages.messageContent}}</p>
+         <b>{{chatMessages.sendingDate|date("d M Y")}}</b>
+     </div>  
+     {% else %}
+     <div class="row  float-left">
+        <b>{{chatMessages.user.firstName}} : </b>
+        <p>{{chatMessages.messageContent}} </p>
+        <b>{{chatMessages.sendingDate|date("d M Y")}}</b>
+     </div>
+     {% endif %}
+    {% endfor %}
+    </div>
+  
+    
+    <div class='discussion'>
+        {% for discussion in project.getDiscussion %}
+            <tr>
+                                
+            <td>{{ discussion.getChatMessages }}</td>
+            <div id="chatDiv" id=id class="container bg-light h-75 overflow-auto">
+                {% for chatMessage in chatMessages %}
+                    {% if app.user == chatMessage.user %}
+                        <div class="row w-75 float-right">
+                            <b>{{ chatMessage.user.firstName }}</b>
+                            <p class="alert alert-info w-100">
+                                {{ chatMessage.messageContent }}
+                            </p>
+                        </div>
+                    {% else %}
+                        <div class="row w-75 float-left">
+                            <b>{{ ChatMessage.user.firstName }}</b>
+                            <p class="alert alert-success w-100">
+                                {{ chatMessage.messageContent }}
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    <p>{{discussion.id}}</p>
+                {% endfor %}
+            </div>
+                                
+            </tr>
+            
+        {% endfor %}
+        <div>
+            <form id="form" class="container row"> 
+                <input id="chatMessage" class="input-group-text col-sm-9" placeholder="Message" type="textarea" />
+                <input id="discussionID" value='{{app.request.get('disc_id')}}' class="input-group-text col-sm-9"  type="hidden" />
+                <input id="projectID" value='{{app.request.get('id')}}' class="input-group-text col-sm-9"  type="hidden" />
+                <button id="submit" class="btn btn-success col-sm-3" type="submit" onClick={handleMessage(event)}>Envoyer</button>
+                
+            </form>
+        </div>
+        <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+        
+            
+       
+    </div>  
+        
+</div>
+    
+{% endblock %}
+{% block javascripts %}
+
+<script>
+    
+    //let chatDiv = document.getElementById("chatDiv");
+        //chatDiv.scrollTop = chatDiv.scrollHeight; // On souhaite scroller toujours jusqu'au dernier message du chat
+    //console.log(chatDiv)
+        let form = document.getElementById('form');
+        //function handleForm(event) {
+            //event.preventDefault(); // Empêche la page de se rafraîchir après le submit du formulaire
+        //}
+        //form.addEventListener('submit', handleForm(form));
+
+        const submit = document.querySelector('.btn');
+        
+        console.log(window.location)
+        function handleMessage(event){ // On change le comportement du submit
+            event.preventDefault()
+            console.log(event)
+            
+           
+            const message = document.getElementById('chatMessage'); // Récupération du message dans l'input correspondant
+            const data = { // La variable data sera envoyée au controller
+                'content': message.value, // On transmet le message...
+                'discussion': discussionID.value // ... Et le canal correspondant
+               
+            }
+            submit.addEventListener("onClick",(event)=>handleMessage(event))
+            console.log(data); // Pour vérifier vos informations
+            fetch('/message', { // On envoie avec un post nos datas sur le endpoint /message de notre application
+                method: 'POST',
+                body: JSON.stringify(data) // On envoie les data sous format JSON
+            }).then((response) => {
+                chatMessage.value = '';
+                //console.log(response);
+                refreshingPage();
+                
+            });
+            function refreshingPage(){
+            const chatDiv=document.querySelector('#chat');
+            Object.entries(chatDiv.children).forEach((item)=>{
+               console.log(item) 
+                chatDiv.removeChild(item[1])
+                
+            })
+            fetch( `/project/${projectID.value}/discussion/${discussionID.value}/refresh`,{
+                method: 'GET',
+            
+            })
+            .then(response=>response.json())
+            .then(json => json.forEach((item)=>{
+                console.log(item)
+                chatDiv.append(Object.assign(document.createElement("p"),{classList:"chatMessage", innerText: item.message_content}))
+            }))
+            
+            }
+            setInterval(refreshingPage, 20000)
+            
+        }
+        
+</script>
+
+{% endblock %}

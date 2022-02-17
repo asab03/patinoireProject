@@ -7,26 +7,44 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
+<div class='homepage'>
+    <div class='accueil'>
+        <h1>Bienvenue sur Voyage, Voyage !</h1>
+        <h2>Bonjour {{ app.user.firstName }}  </h2>
+    </div>
+    <div class='activProject'>
+        <div>
+            <h2>Vos Projets</h2>
+            <a href="{{ path('project_add') }}">Créer un nouveau projet</a>
+            <a href="{{ path('projects') }}">Voir vos Projets</a>
 
-<div >
-    <h1>Hello {{ app.user.firstName }} ! ✅</h1>
-
-    bienvenue sur la HomePage
-</div>
-<div>
-    <h1>Vos Projets</h1>
-    <a href="{{ path('project_add') }}">Créer un nouveau projet</a>
-    <a href="{{ path('projects') }}">Voir vos Projets</a>
-
-</div>
-<div>
- 
-    {% for project in app.user.projects %}
-        <h2>{{project.getTitle}}</h2>
-        <p>{{project.getDescription}}</p>
-        <p>{{project.getDateIn|date("d M Y")}}</p>
-        <p>{{project.getDateOut|date("d M Y")}}</p>
-        <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
-    {% endfor %}
-</div>
+        </div>
+        <div class="userProject">
+    
+            {% for project in app.user.projects %}
+            <div class="projectCard">
+                <h2>{{project.getTitle}}</h2>
+                <p>{{project.getDescription}}</p>
+                <p>{{project.getDateIn|date("d M Y")}}</p>
+                <p>{{project.getDateOut|date("d M Y")}}</p>
+                <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h2> Vos anciens projets </h2>
+    </div>    
+ </div>   
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="/js/vanilla-tilt.js"></script>
+<script>
+    VanillaTilt.init(document.querySelector(".accueil"), {
+		max: 15,
+		speed: 100,
+        glare : true,
+        "max-glare": 1,
+	});
+</script>
 {% endblock %}

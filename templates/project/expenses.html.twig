@@ -19,19 +19,20 @@
                             <th>Titre</th>
                             <th>Date</th>
                             <th>Montant</th>
-                            <th>Crediteur</th>
-                            <th>Debiteurs</th>
+                            <th>Fait par</th>
+                            <th>Supprimer</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        {% for expense in expenses %}
+                        {% for expense in project.getExpenses %}
                         <tr>
                             
                             <td>{{ expense.getTitle }}</td>
                             <td>{{ expense.getDate|date("d-M-Y") }}</td>
-                            <td>{{ expense.getAmount }}</td>
+                            <td>{{ expense.getAmount}} €</td>
                             <td>{{ expense.getUser }}</td>
-                            <td>{{ expense.getDebiteur}}</td>
+                            <td><a href="{{ path('expense_delete', {"id":project.id, "expense_id":expense.id})}}"  class="button btnDelete">Delete</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -20,16 +20,18 @@
                             <th>Date</th>
                             <th>document</th>
                             <th>Voir</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for document in documents %}
+                        {% for document in project.getDocuments %}
                         <tr>
                             
                             <td>{{ document.getTitle }}</td>
                             <td>{{ document.getDate|date("d-M-Y") }}</td>
                             <td>{{ document.getDocument }}</td>
                             <td><a href="{{ path('project_document_show', {'id': project.id, 'doc_id': document.id}) }}">Voir</a></td>
+                            <td><a href="{{ path('document_delete', {"id":project.id, "document_id":document.id})}}">Delete</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -10,36 +10,18 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ app.user.firstName }} ! ✅</h1>
-    <h1>Adding a new document</h1> 
-    {{ form_start(form) }}
+    <h1>Ajouter une nouvelle dépense</h1> 
+    
+   {{ form_start(form) }}
         <div >
-                <div >
-                        {{ form_label(form.title) }}
-                        {{ form_widget(form.title) }}
-                </div>
-                <div >
-                        {{ form_label(form.date) }}
-                        {{ form_widget(form.date) }}
-                </div>
-               
-                <div >
-                        {{ form_label(form.amount) }}
-                        {{ form_widget(form.amount) }}
-                </div>
-                <div >
-                        {{ form_label(form.user) }}
-                        {{ form_widget(form.user) }}
-                </div>
-                <div >
-                        {{ form_label(form.debiteur) }}
-                        {{ form_widget(form.debiteur) }}
-                </div>
-                
+                {{ form_row(form.title) }}
+                {{ form_row(form.amount) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.user) }}
         </div>
-        <button class="btn ">{{ button_label|default('Save') }}</button>    
+        {# <button class="btn ">{{ button_label|default('Save') }}</button>     #}
     {{ form_end(form) }}
-
-        <a class="button button-primary" href="{{ path('projects_document', {'id': project.id}) }}">Cancel</a>
+        <a class="button button-primary" href="{{ path('projects_expense', {'id': project.id}) }}">Cancel</a>
   
 </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Discussion;
 use App\Entity\Document;
 use App\Form\DocumentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Project;
+use App\Repository\DiscussionRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
@@ -53,7 +55,7 @@ class ProjectController extends AbstractController
    /**
      * @Route("/project/add/save", methods={"POST"}, name="project_add_save")
      */
-    public function projectsAddSave(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator, ProjectRepository $projectRepository): Response
+    public function projectsAddSave(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator, ProjectRepository $projectRepository, DiscussionRepository $discussionRepository): Response
     {
         
 
@@ -66,8 +68,10 @@ class ProjectController extends AbstractController
         $project->setDescription($request->request->get('description'));
         $project->setStartDateStr($request->request->get('date_in'));
         $project->setEndDateStr($request->request->get('date_out'));
-        
-        
+        $project->addUser($this->container->get('security.token_storage')->getToken()->getUser());
+       
+    
+                     
 
         $errors = $validator->validate($project);
 
@@ -87,6 +91,14 @@ class ProjectController extends AbstractController
         $entityManager->persist($project);
         $entityManager->flush();
 
+        $discussion= new Discussion;
+        $discussion->setProject($project);
+        
+
+        $entityManager->persist($discussion);
+        $entityManager->flush();
+        
+
         return $this->redirectToRoute('home');
     }
     /**
@@ -94,10 +106,11 @@ class ProjectController extends AbstractController
      */
     public function show(Project $project,UserRepository $userRepository): Response
     {
-        
+        $discussion = $project-> getDiscussion();
 
         return $this->render('project/showproject.html.twig', [
             'project' => $project,
+            'discussion'=> $discussion
         ]);
     }
     /**
@@ -136,7 +149,9 @@ class ProjectController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
         
-        return $this->redirectToRoute('projects');
+        return $this->redirectToRoute('project_show',[
+            'id'=> $project->getId()
+        ]);
     }
 
      /**
@@ -147,6 +162,7 @@ class ProjectController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($project);
+        
         $entityManager->flush();
 
         return $this->redirectToRoute('projects');
@@ -189,7 +205,9 @@ class ProjectController extends AbstractController
         $entityManager->persist($project);
         $entityManager->flush();
 
-        return $this->redirectToRoute('projects');
+        return $this->redirectToRoute('project_show',[
+            'id'=> $project->getId()
+        ]);
     }
     /**
      * @Route("/project/{id}/document", methods={"GET"}, name="projects_document")
@@ -278,88 +296,5 @@ class ProjectController extends AbstractController
         return $this->file($projectRoot.'/public/uploads/documents/'.$filename, null, ResponseHeaderBag::DISPOSITION_INLINE);
     }
 
-//      /**
-//      * @Route("/project/{id}/add_document/save", methods={"POST"}, name="projects_addDocument_save")
-//      */
-//    /* public function projectsAddDocumentSave(Request $request, SluggerInterface $slugger,ValidatorInterface $validator,ManagerRegistry $doctrine, DocumentRepository $documentRepository, EntityManagerInterface $entityManager): Response
-//     {
-        
-        
-        
-//         $document = new Document();
-//         $form = $this->createForm(DocumentType::class, $document);
-//         $form->handleRequest($request);
 
-        
-               
-//         if ($form->isSubmitted() && $form->isValid()) {
-//             $entityManager = $doctrine->getManager();
-//             $format = 'Y-m-d';
-//             /** @var UploadedFile $document */
-            
-//             $documentFile = $form->get('document')->getData();
-
-//             // this condition is needed because the 'brochure' field is not required
-//             // so the PDF file must be processed only when a file is uploaded
-//             if ($documentFile) {
-//                 $originalFilename = pathinfo($documentFile->getClientOriginalName(), PATHINFO_FILENAME);
-//                 // this is needed to safely include the file name as part of the URL
-//                 $safeFilename = $slugger->slug($originalFilename);
-//                 $newFilename = $safeFilename.'-'.uniqid().'.'.$documentFile->guessExtension();
-
-//                 // Move the file to the directory where brochures are stored
-//                 try {
-//                     $document->move(
-//                         $this->getParameter('document_directory'),
-//                         $newFilename
-//                     );
-//                 } catch (FileException $e) {
-//                     // ... handle exception if something happens during file upload
-//                 }
-
-//                 // updates the 'brochureFilename' property to store the PDF file name
-//                 // instead of its contents
-//                 $document->setDocument($newFilename);
-//             }
-//             $document->setTitle($form->get('title')->getData());
-            
-//             $document->setDate(\DateTime::createFromFormat($format, $form->get('date')->getData()));
-//             $document->setProject($project);
-            
-//             $entityManager->persist($document);
-//             $entityManager->flush();
-
-//             // ... persist the $product variable or any other work
-
-//             return $this->redirectToRoute('document');
-//         }
-//         return $this->renderForm('document/adddocument.html.twig', [
-//             'form' => $form,
-//         ]);
-//     //}
-    
-    
-    /**
-     * @Route("/project/{id}/document/save", methods={"POST"}, name="projects_adddocument_save")
-     */
-   /* public function projectsAddDocumentSave(LoggerInterface $logger, ManagerRegistry $doctrine, DocumentRepository $documentRepository, Request $request, Project $project): Response
-    {
-        $entityManager = $doctrine->getManager();
-
-        $project->clearUsers();
-
-        $listIdUser = $request->request->get('project_id', []);
-
-        $logger->debug("valeur userId", ["userId"=>$listIdUser]);
-        
-        foreach($listIdUser as $userId) {
-            $user = $userRepository->find($userId);
-            $project->addUser($user);
-        }
-
-        $entityManager->persist($project);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('projects');
-    }*/
 }

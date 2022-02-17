@@ -60,12 +60,12 @@ class NavigationController extends AbstractController
     * @Route("/admin", name="index")
     * 
     */
-        public function admin(SessionInterface $session,UserRepository $userRepository):Response
+        public function admin(SessionInterface $session,UserRepository $userRepository, ProjectRepository $projectRepository):Response
         {
             $user = $this->getUser();
             
             if($user && in_array('ROLE_ADMIN', $user->getRoles())){
-                return $this->render('user/index.html.twig', ['users'=> $userRepository-> findAll(),]);
+                return $this->render('user/index.html.twig', ['users'=> $userRepository-> findAll(), 'projects' => $projectRepository-> findAll()]);
         }
 
         $session->set("message", "Vous n'avez pas le droit d'acceder à la page admin, vous avez été redirigé sur cette page");

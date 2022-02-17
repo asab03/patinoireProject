@@ -3,6 +3,7 @@
 {% block title %}{{ project.title}}{% endblock %}
 
 {% block body %}
+    <div class='tableShow'>
     <h1>{{ project.Title }}</h1>
 
     <table class="table">
@@ -28,16 +29,29 @@
 
     <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
     <a href="{{ path('projects_addUser', {'id': project.id}) }}">Ajouter participant</a>
-
-    <div>
-
-    <h3>Depot de documents</h3>
-    <a href="{{ path('projects_document', {'id': project.id}) }}">Voir</a>
-    <h3>Dépense</h3>
-    <a href="{{ path('projects_expense', {'id': project.id}) }}">ici</a>
-    <h3>Messagerie</h3>
-    <a href="{{ path('document', {'id': project.id}) }}">ici</a>
+    <div class="userprojectPic">
+        {% for user in project.user %}
+             {% if user.getProfilPicture %}
+                    <img src='/uploads/profilPicture/{{ user.profilPicture }}' class="profilPic">
+                {% else %}
+                    <img src='/img/profil.png' class="profilPic">
+                {% endif %}
+        {% endfor %}
+    </div>
+    <div class="fonctionnalité">
+        <div class='fct'>
+        <h3>Depot de documents</h3>
+        <a href="{{ path('projects_document', {'id': project.id}) }}">Voir</a>
+        </div>
+        <div class='fct'>
+        <h3>Dépense</h3>
+        <a href="{{ path('projects_expense', {'id': project.id}) }}">ici</a>
+        </div>
+        <div class='fct'>
+        <h3>Messagerie</h3>
+        <a href="{{ path('project_discussion', {'id': project.id, 'disc_id':discussion.id}) }}">ici</a>
+        </div>
     </div>
 
-    
+  </div>  
 {% endblock %}

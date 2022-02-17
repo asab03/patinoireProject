@@ -14,13 +14,15 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class DocumentController extends AbstractController
 {
     /**
      * @Route("/document", name="document")
      */
-    public function index(DocumentRepository $documentRepository  ): Response
+    public function index(DocumentRepository $documentRepository, Document $document  ): Response
     {
         $documents = $documentRepository->findAll();
         $project = $document -> getProject();
@@ -31,57 +33,21 @@ class DocumentController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/project/{id}/add_document", methods={"GET"}, name="projects_addDocument")
+     
+    /**
+     * @Route("/project/{id}/document/{document_id}", name="document_delete", methods={"GET", "DELETE"})
+     * @ParamConverter("document", options={"id" = "document_id"})
      */
-    public function AddDocument(Request $request, SluggerInterface $slugger,ValidatorInterface $validator)
+    public function deleteDocument(Request $request, Document $document, ManagerRegistry $doctrine, Project $project): Response
     {
-        $format = 'Y-m-d';
-        
-        $document = new Document();
-        $document->setTitle($request->request->get('title'));
-        $document->setDate($request->request->get('date'));
-        $document->setDocument($request->request->get('document'));
-        $form = $this->createForm(DocumentType::class, $document);
-        $form->handleRequest($request);
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($document);
+        $entityManager->flush();
 
-        $document->setDate(\DateTime::createFromFormat($format, $request->request->get('date_in')));
-               
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $document */
-            $document = $form->get('document')->getData();
-
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-            if ($document) {
-                $originalFilename = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$document->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $document->move(
-                        $this->getParameter('document_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $document->setDocument($newFilename);
-            }
-
-            // ... persist the $product variable or any other work
-
-            return $this->redirectToRoute('document');
-        }
-        return $this->renderForm('document/adddocument.html.twig', [
-            'form' => $form,
+        return $this->redirectToRoute('projects_document',[
+            'id'=> $project->getId()
         ]);
-    }
+}
 
     
     

@@ -3,6 +3,7 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
+<div class="tableShow">
     <h1>Edit User</h1>
 
     {{ form_start(form, {'attr': {'id': 'new_edit_user'}}) }}
@@ -29,13 +30,15 @@
                         {{ form_label(form.last_name) }}
                         {{ form_widget(form.last_name) }}
                 </div>
+                <div >
+                        {{ form_label(form.profil_picture) }}
+                        {{ form_widget(form.profil_picture) }}
                 </div>
-                
-                </div>
-                <button class="btn ">{{ button_label|default('Update') }}</button>
+                <button class="btn ">{{ button_label|default('Mettre à jour') }}</button>
         {{ form_end(form) }}
 
     
 
     {{ include('user/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

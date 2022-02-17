@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ChatMessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ChatMessageRepository::class)
@@ -14,23 +15,27 @@ class ChatMessage
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("chatMessage")
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("chatMessage")
      */
     private $message_content;
 
     /**
      * @ORM\ManyToOne(targetEntity=Discussion::class, inversedBy="chatMessages")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("chatMessage")
      */
     private $discussion;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chatMessages")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("chatMessage")
      */
     private $user;
 
@@ -90,5 +95,9 @@ class ChatMessage
         $this->sending_date = $sending_date;
 
         return $this;
+    }
+    public function prePersist()
+    {
+        $this->sending_date = new \DateTime();
     }
 }

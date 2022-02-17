@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DiscussionController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ app.user.firstName }} ! ✅</h1>
+
+    <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+
+    <h2>{{project.title}}</h2>
+
+   <div class="container" style="height: 600px">
+        <div class="container bg-light h-75 overflow-auto">
+            {% for chatMessage in chatMessages %}
+                {% if app.user == chatMessage.user %}
+                    <div class="row w-75 float-right">
+                        <b>{{ chatMessage.user.firstName }}</b>
+                        <p class="alert alert-info w-100">
+                            {{ chatMessage.messageContent }}
+                        </p>
+                    </div>
+                {% else %}
+                    <div class="row w-75 float-left">
+                        <b>{{ chatMessage.user.firstName }}</b>
+                        <p class="alert alert-success w-100">
+                            {{ chatMessage.messageContent }}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <form id="form" class="container row"> 
+                <input id="chatMessage" class="input-group-text col-sm-9" placeholder="Message" type="text" />
+                <button id="submit" type="submit" class="btn btn-success col-sm-3">Envoyer</button>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}
