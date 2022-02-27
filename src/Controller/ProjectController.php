@@ -57,8 +57,6 @@ class ProjectController extends AbstractController
      */
     public function projectsAddSave(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator, ProjectRepository $projectRepository, DiscussionRepository $discussionRepository): Response
     {
-        
-
         $entityManager = $doctrine->getManager();
 
         $format = 'Y-m-d';
@@ -68,10 +66,7 @@ class ProjectController extends AbstractController
         $project->setDescription($request->request->get('description'));
         $project->setStartDateStr($request->request->get('date_in'));
         $project->setEndDateStr($request->request->get('date_out'));
-        $project->addUser($this->container->get('security.token_storage')->getToken()->getUser());
-       
-    
-                     
+        $project->addUser($this->container->get('security.token_storage')->getToken()->getUser());         
 
         $errors = $validator->validate($project);
 
@@ -87,17 +82,14 @@ class ProjectController extends AbstractController
         $project->setDateIn(\DateTime::createFromFormat($format, $request->request->get('date_in')));
         $project->setDateOut(\DateTime::createFromFormat($format, $request->request->get('date_out')));
     
-         
         $entityManager->persist($project);
         $entityManager->flush();
 
         $discussion= new Discussion;
         $discussion->setProject($project);
-        
-
+    
         $entityManager->persist($discussion);
         $entityManager->flush();
-        
 
         return $this->redirectToRoute('home');
     }

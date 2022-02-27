@@ -21,7 +21,7 @@ class ChatMessage
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("chatMessage")
+     * @Groups("chatMessage",{"message"})
      */
     private $message_content;
 
@@ -44,7 +44,7 @@ class ChatMessage
      */
     private $sending_date;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }

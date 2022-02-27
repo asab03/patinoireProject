@@ -15,12 +15,10 @@
     </head>
     <body>
         <section>
-          <div class='color'></div>
-                        <div class='color'></div>
-                        <div class='color'></div>
                 <nav class='navbar'>
                                 <img src='/img/logo.png' class="logo">
                                 {% if app.user %}
+                                        <div class='landing'>
                                         {# Si l'utilisateur est authentifié #}
                                                 <a class="btn " href="{{ path('home') }}">Page home</a>
                                                 <a class="btn " href="{{ path('user_show', {"id":app.user.id}) }}">Profil</a>
@@ -28,9 +26,7 @@
                                                 {# Si l'utilisateur est authentifié et qu'il est admin #}
                                                 <a class="btn " href="{{ path('index') }}">Page admin</a>
                                         {% endif %}
-                                        <div>
-                                                                                
-                                                
+                                             
                                                 {% if app.user.getProfilPicture %}
                                                         <img src='/uploads/profilPicture/{{ app.user.profilPicture }}' class="profilPic">
                                                 {% else %}
@@ -39,13 +35,13 @@
                                                 <a class="btn " href="{{ path('app_logout') }}"><img src='/img/logout.png' class="profilPic"></a>
                                         </div>
                                 {% else %}
-                                        <div >
+                                        <div class='landing'>
                                                 <a class="btn" href="{{ path('user_new') }}">S'inscrire</a>
                                                 <a class="btn" href="{{ path('app_login') }}">Se connecter</a>
                                         </div>
                                 {% endif %}
-                        </nav>
-                        <div >
+                </nav>
+                        <div class='largeur' >
                                 {% if message is defined %}
                                         <div class="alert ">
                                                 {{ message }}
@@ -56,6 +52,13 @@
                         </div>
                         
         </section>
+        <footer>
+        <div>
+        <a class="btn" href="#">Contact</a>
+        <a class="btn" href="#">Mentions Legales</a>
+        </div>
+        <p>© 2022 Voyage, Voyage !</p>
+        </footer>
         {% block javascripts %}
             <script
                 src="https://code.jquery.com/jquery-3.5.1.min.js"

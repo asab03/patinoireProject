@@ -8,25 +8,27 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
+<div  class="example-wrapper">
     <h1>Hello {{ app.user.firstName }} ! ✅</h1>
     <h2>{{project.title}}</h2>
-    <div id='chat'>
-    {% for chatMessages in chatMessage %}
-     {% if app.user == chatMessages.user %}
-     <div class="row float-right">  
-         <b>{{chatMessages.user.firstName}} : </b>
-         <p> {{chatMessages.messageContent}}</p>
-         <b>{{chatMessages.sendingDate|date("d M Y")}}</b>
-     </div>  
-     {% else %}
-     <div class="row  float-left">
-        <b>{{chatMessages.user.firstName}} : </b>
-        <p>{{chatMessages.messageContent}} </p>
-        <b>{{chatMessages.sendingDate|date("d M Y")}}</b>
-     </div>
-     {% endif %}
-    {% endfor %}
+    <div id ="up">
+        <div id='chat'>
+        {% for chatMessages in chatMessage %}
+        {% if app.user == chatMessages.user %}
+        <div class="row chatMessage float-right">  
+            <b>{{chatMessages.user.firstName}} : </b>
+            <p> {{chatMessages.messageContent}}</p>
+            <b>{{chatMessages.sendingDate|date("d M Y")}}</b>
+        </div>  
+        {% else %}
+        <div class="row  chatMessage float-left">
+            <b>{{chatMessages.user.firstName}} : </b>
+            <p>{{chatMessages.messageContent}} </p>
+            <b>{{chatMessages.sendingDate|date("d M Y H:i:s")}}</b>
+        </div>
+        {% endif %}
+        {% endfor %}
+        </div>
     </div>
   
     
@@ -35,7 +37,7 @@
             <tr>
                                 
             <td>{{ discussion.getChatMessages }}</td>
-            <div id="chatDiv" id=id class="container bg-light h-75 overflow-auto">
+            <div  id=id class="container bg-light h-75 overflow-auto">
                 {% for chatMessage in chatMessages %}
                     {% if app.user == chatMessage.user %}
                         <div class="row w-75 float-right">
@@ -80,9 +82,9 @@
 {% endblock %}
 {% block javascripts %}
 
-<script>
+{# <script>
     
-    //let chatDiv = document.getElementById("chatDiv");
+    let chatDiv = document.getElementById("chat");
         //chatDiv.scrollTop = chatDiv.scrollHeight; // On souhaite scroller toujours jusqu'au dernier message du chat
     //console.log(chatDiv)
         let form = document.getElementById('form');
@@ -115,29 +117,68 @@
                 //console.log(response);
                 refreshingPage();
                 
-            });
+            });}
             function refreshingPage(){
             const chatDiv=document.querySelector('#chat');
-            Object.entries(chatDiv.children).forEach((item)=>{
-               console.log(item) 
-                chatDiv.removeChild(item[1])
-                
-            })
+            
             fetch( `/project/${projectID.value}/discussion/${discussionID.value}/refresh`,{
-                method: 'GET',
+                'method': 'GET',
+                'content-type': 'application/json'
             
             })
-            .then(response=>response.json())
-            .then(json => json.forEach((item)=>{
-                console.log(item)
-                chatDiv.append(Object.assign(document.createElement("p"),{classList:"chatMessage", innerText: item.message_content}))
-            }))
-            
+            .then(response=>response.json(chatMessage))
+            .then(data => {
+                const ChatMessage= data.length
+                console.log(ChatMessage)
+                chatDiv.append(Object.assign(document.createElement("p"),{classList:"chatMessage", innerText: ChatMessage}))}
+            )
             }
-            setInterval(refreshingPage, 20000)
             
-        }
+            
         
+</script> #}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+
+    let chatDiv = document.getElementById("chat");
+    let form = document.getElementById('form');
+    const submit = document.querySelector('.btn');
+
+    console.log(window.location)
+    function handleMessage(event){
+        event.preventDefault();
+        console.log(event);
+
+        const message = document.getElementById('chatMessage');
+
+        const data = {
+            'content': message.value,
+            'discussion': discussionID.value   
+        }
+        console.log(data);
+
+        fetch('/message', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        }).then((response) => {
+            chatMessage.value = '';
+            updateChat()
+        });
+        console.log(chatMessage.value)
+        chatDiv.append(Object.assign(document.createElement("p"),{classList:"float-right", innerText: chatMessage.value}))
+        
+    }
+    function updateChat(){
+        $( "#up" ).load(window.location.href + " #chat" );
+
+    }
+    setInterval(function(){
+        $( "#up" ).load(window.location.href + " #chat" );
+    }, 4000)
+
+   
+    submit.addEventListener("onClick",(event)=>handleMessage(event))
+
 </script>
 
 {% endblock %}

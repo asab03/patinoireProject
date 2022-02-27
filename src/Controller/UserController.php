@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePasswordFormType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
@@ -113,7 +114,7 @@ class UserController extends AbstractController
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_show', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/edit.html.twig', [
@@ -144,6 +145,38 @@ class UserController extends AbstractController
         return $this->render('user/projectUser.html.twig', [
             'projects' => $projects,
             'user' => $user,
+        ]);
+    }
+    /**
+     * @Route("/{id}/edit-password", name="user_edit_password", methods={"GET", "POST"})
+     */
+    public function editPassword(Request $request, User $user, EntityManagerInterface $entityManager,UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $user = $this-> getUser();
+        $form = $this->createForm(ChangePasswordFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $old_password= $form-> get('old_password')->getData();
+
+            if($passwordEncoder->isPasswordValid($user, $old_password)){
+                $new_password = $form->get('plainPassword')->getData();
+
+                $password= $passwordEncoder->encodePassword($user, $new_password);
+
+                $user->setPassword($password);
+                $entityManager->flush();
+
+            }
+            
+            
+
+            return $this->redirectToRoute('user_show', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('user/edit_password.html.twig', [
+            'user' => $user,
+            'form' => $form,
         ]);
     }
     

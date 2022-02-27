@@ -19,7 +19,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Form\DiscussionType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Mercure\PublisherInterface;
+use Symfony\Component\Mercure\Update;
+use Symfony\Component\Mercure\HubInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\WebLink\Link;
 
 
 class DiscussionController extends AbstractController
@@ -28,7 +33,7 @@ class DiscussionController extends AbstractController
      * @Route("/project/{id}/discussion/{disc_id}", methods={"GET"}, name="project_discussion")
      * @ParamConverter("discussion", options={"id" = "disc_id"})
      */
-    public function projectsDiscussion(DiscussionRepository $discussionRepository, Project $project, ChatMessageRepository $chatMessageRepository, Discussion $discussion): Response
+    public function projectsDiscussion(DiscussionRepository $discussionRepository, Project $project, ChatMessageRepository $chatMessageRepository, Request $request,Discussion $discussion): Response
     {
         $discussions = $discussionRepository->findAll();
         
@@ -39,6 +44,8 @@ class DiscussionController extends AbstractController
             'discussion'=> $discussion,       
         ]);
         
+        //$hubUrl = $this->getParameter('mercure.default_hub'); // Mercure automatically define this parameter
+       //$this->addLink($request, new Link('mercure', $hubUrl)); // Use the WebLink Component to add this header to the following response
 
         return $this->render('discussion/discussion.html.twig', [
             'project' => $project,
@@ -53,11 +60,11 @@ class DiscussionController extends AbstractController
     }
    
 
-    /**
+   /**
      * @Route("/project/{id}/discussion/{disc_id}/refresh", methods={"GET"}, name="project_discussion_refresh")
      * @ParamConverter("discussion", options={"id" = "disc_id"})
      */
-    public function projectsDiscussionRefresh(DiscussionRepository $discussionRepository, Project $project, SerializerInterface $serializer,ChatMessageRepository $chatMessageRepository, Discussion $discussion): Response
+    public function projectsDiscussionRefresh(DiscussionRepository $discussionRepository, Project $project, SerializerInterface $serializer,ChatMessageRepository $chatMessageRepository, Discussion $discussion): JsonResponse
     {
         $discussions = $discussionRepository->findAll();
         
@@ -67,7 +74,8 @@ class DiscussionController extends AbstractController
         $chatMessages= $chatMessageRepository-> findBy([
             'discussion'=> $discussion,       
         ]);
-        $jsonMessage = $serializer->serialize($chatMessages, 'json', [
+        
+        $jsonMessage = $serializer->serialize($chatMessages, ChatMessage::class,'json', [
             'groups' => ['chatMessage'] // On serialize la réponse avant de la renvoyer
         ]);
         
@@ -76,7 +84,7 @@ class DiscussionController extends AbstractController
             $jsonMessage,
             Response::HTTP_OK,
             [],
-            true
+            
         );
             
         
@@ -103,7 +111,7 @@ class DiscussionController extends AbstractController
     /**
      * @Route("/message", name="message", methods={"POST"})
      */
-    public function sendMessage(Request $request, DiscussionRepository $discussionRepository, SerializerInterface $serializer, EntityManagerInterface $em): JsonResponse
+    public function sendMessage(Request $request, DiscussionRepository $discussionRepository, SerializerInterface $serializer, EntityManagerInterface $em, HubInterface $hub): JsonResponse
     {
         $data = \json_decode($request->getContent(), true); // On récupère les data postées et on les déserialize
         if (empty($content = $data['content'])) {
@@ -130,11 +138,13 @@ class DiscussionController extends AbstractController
             'groups' => ['chatMessage'] // On serialize la réponse avant de la renvoyer
         ]);
 
+       
         return new JsonResponse( // Enfin, on retourne la réponse
             $jsonMessage,
             Response::HTTP_OK,
             [],
-            true
+            
         );
     }
+    
 }

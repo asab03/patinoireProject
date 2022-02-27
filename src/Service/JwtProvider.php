@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Service\Mercure;
+
+use Lcobucci\JWT\ClaimsFormatter;
+use Lcobucci\JWT\Encoder;
+use Lcobucci\JWT\Token\Builder;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Key;
+
+class JwtProvider
+{
+    private string $key;
+
+    public function __construct(string $key)
+    {
+        $this->key = $key;
+    }
+
+    public function __invoke(): string
+    {
+        $signer = new Sha256();
+
+        return (new Builder())
+            ->withClaim('mercure', ['publish' => ['*']])
+            ->getToken($signer, new Key($this->key));
+            
+    }
+}

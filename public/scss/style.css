@@ -14,45 +14,52 @@ section {
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(to bottom, #f1f4f9, #dff1ff 70%);
+  background: whitesmoke;
   background-repeat: no-repeat;
+  background-size: 50% 100vh;
   min-height: 100vh;
-  z-index: -1;
+  z-index: 0;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  height: 15vh;
+  color: #dff1ff;
+  background: linear-gradient(
+    to bottom right,
+    rgb(250, 217, 97),
+    rgb(247, 107, 28)
+  );
+}
+.largeur {
+  width: 100%;
+}
+.container1 {
+  display: flex;
+  align-items: center;
+  background-image: url(../img/voyage.jpg);
+  background-repeat: no-repeat;
+  background-size: 54% 100vh;
+  z-index: 1;
+  min-height: 100vh;
 }
 
-section .color {
-  position: absolute;
-  filter: blur(250px);
-  z-index: -1;
-}
-section .color:nth-child(1) {
-  top: -350px;
-  width: 600px;
-  height: 600px;
-  background: #ff359b;
-  border-radius: 50%;
-}
-section .color:nth-child(2) {
-  bottom: -150px;
-  left: 100px;
-  width: 500px;
-  height: 500px;
-  background: #fffd87;
-}
-section .color:nth-child(3) {
-  bottom: 50px;
-  right: 100px;
-  width: 300px;
-  height: 300px;
-  background: #00d2ff;
-}
-
+/*navbar*/
 .navbar {
   display: flex;
-  position: relative;
-  justify-content: space-evenly;
+  position: absolute;
+  top: 0;
+  justify-content: space-between;
   text-align: center;
   width: 100%;
+  background-color: white;
+}
+.landing {
+  display: flex;
+  align-items: center;
 }
 .navbar .logo {
   height: 10vh;
@@ -62,9 +69,12 @@ section .color:nth-child(3) {
   background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));
   padding: 1rem;
   height: 3.5rem;
+  margin-right: 5rem;
+
   border-radius: 1.5rem;
   color: #dff1ff;
 }
+/*fin navbar*/
 .accueil h1 {
   text-transform: uppercase;
   font-family: "Roboto", sans-serif;
@@ -72,7 +82,7 @@ section .color:nth-child(3) {
   font-size: 1rem;
 }
 .connexion {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -86,7 +96,43 @@ section .color:nth-child(3) {
   border-left: 1px solid rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(5px);
   color: white;
+  margin-left: 9%;
   z-index: 2;
+}
+.connexion img {
+  height: 55vh;
+}
+.container2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 100vh;
+}
+.container2 h2 {
+  font-size: 2rem;
+}
+.titre1 {
+  align-self: center;
+  width: 65vw;
+}
+.titre2 {
+  width: 40vw;
+  align-self: flex-end;
+}
+.container2 p {
+  width: 40vw;
+}
+.imgdiv {
+  display: flex;
+  justify-content: center;
+}
+.container2 img {
+  align-self: center;
+  height: 40vh;
+  width: 15vw;
+  margin-right: 5%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 25px rgba(247, 107, 28, 0.5);
 }
 .homepage {
   display: flex;
@@ -187,10 +233,12 @@ section .color:nth-child(3) {
   display: flex;
   flex-direction: row;
 }
+/*Chat*/
 #chat {
   background-color: white;
   box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
   display: flex;
+  overflow: scroll;
   flex-direction: column;
   padding: 2rem;
   height: 70vh;
