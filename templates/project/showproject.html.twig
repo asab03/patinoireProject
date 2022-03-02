@@ -3,13 +3,13 @@
 {% block title %}{{ project.title}}{% endblock %}
 
 {% block body %}
+<div class='container4'>
     <div class='tableShow'>
     <h1>{{ project.Title }}</h1>
 
     <table class="table">
         <tbody>
-            
-            
+                      
            
             <tr>
                 <th>Description</th>
@@ -26,9 +26,11 @@
             
         </tbody>
     </table>
+    <div>
 
     <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
     <a href="{{ path('projects_addUser', {'id': project.id}) }}">Ajouter participant</a>
+    </div>
     <div class="userprojectPic">
         {% for user in project.user %}
              {% if user.getProfilPicture %}
@@ -41,17 +43,18 @@
     <div class="fonctionnalité">
         <div class='fct'>
         <h3>Depot de documents</h3>
-        <a href="{{ path('projects_document', {'id': project.id}) }}">Voir</a>
+        <a href="{{ path('projects_document', {'id': project.id}) }}"><img src='/img/docs.png' class="fctPic"></a>
         </div>
         <div class='fct'>
-        <h3>Dépense</h3>
-        <a href="{{ path('projects_expense', {'id': project.id}) }}">ici</a>
+        <h3>Dépenses</h3>
+        <a href="{{ path('projects_expense', {'id': project.id}) }}"><img src='/img/calculator.png' class="fctPic"></a>
         </div>
         <div class='fct'>
         <h3>Messagerie</h3>
-        <a href="{{ path('project_discussion', {'id': project.id, 'disc_id':discussion.id}) }}">ici</a>
+        <a href="{{ path('project_discussion', {'id': project.id, 'disc_id':discussion.id}) }}"><img src='/img/chat.png' class="fctPic"></a>
         </div>
     </div>
 
   </div>  
+</div>
 {% endblock %}

@@ -7,8 +7,8 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
-<div  class="example-wrapper">
+<div class='container4'>
+    <div  class="example-wrapper">
     <h1>Hello {{ app.user.firstName }} ! ✅</h1>
     <h2>{{project.title}}</h2>
     <div id ="up">
@@ -77,66 +77,12 @@
        
     </div>  
         
-</div>
-    
+    </div>
+</div>   
 {% endblock %}
 {% block javascripts %}
 
-{# <script>
-    
-    let chatDiv = document.getElementById("chat");
-        //chatDiv.scrollTop = chatDiv.scrollHeight; // On souhaite scroller toujours jusqu'au dernier message du chat
-    //console.log(chatDiv)
-        let form = document.getElementById('form');
-        //function handleForm(event) {
-            //event.preventDefault(); // Empêche la page de se rafraîchir après le submit du formulaire
-        //}
-        //form.addEventListener('submit', handleForm(form));
 
-        const submit = document.querySelector('.btn');
-        
-        console.log(window.location)
-        function handleMessage(event){ // On change le comportement du submit
-            event.preventDefault()
-            console.log(event)
-            
-           
-            const message = document.getElementById('chatMessage'); // Récupération du message dans l'input correspondant
-            const data = { // La variable data sera envoyée au controller
-                'content': message.value, // On transmet le message...
-                'discussion': discussionID.value // ... Et le canal correspondant
-               
-            }
-            submit.addEventListener("onClick",(event)=>handleMessage(event))
-            console.log(data); // Pour vérifier vos informations
-            fetch('/message', { // On envoie avec un post nos datas sur le endpoint /message de notre application
-                method: 'POST',
-                body: JSON.stringify(data) // On envoie les data sous format JSON
-            }).then((response) => {
-                chatMessage.value = '';
-                //console.log(response);
-                refreshingPage();
-                
-            });}
-            function refreshingPage(){
-            const chatDiv=document.querySelector('#chat');
-            
-            fetch( `/project/${projectID.value}/discussion/${discussionID.value}/refresh`,{
-                'method': 'GET',
-                'content-type': 'application/json'
-            
-            })
-            .then(response=>response.json(chatMessage))
-            .then(data => {
-                const ChatMessage= data.length
-                console.log(ChatMessage)
-                chatDiv.append(Object.assign(document.createElement("p"),{classList:"chatMessage", innerText: ChatMessage}))}
-            )
-            }
-            
-            
-        
-</script> #}
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 

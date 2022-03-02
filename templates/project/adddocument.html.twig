@@ -7,31 +7,39 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
+<div class='container4'>
+    <div class='tableShow '>
+        <div class="example-wrapper">
+                <h1>Hello {{ app.user.firstName }} ! ✅</h1>
+                <h1>Adding a new document</h1> 
+                {{ form_start(form) }}
+                        <div class='Login2'>
+                                <div >
+                                        <div class='logdiv'>
+                                        {{ form_label(form.title) }}
+                                        {{ form_widget(form.title) }}
+                                        </div>
+                                        <div class='logdiv'>
+                                                {{ form_label(form.date) }}
+                                                {{ form_widget(form.date) }}
+                                        </div>
+                                
+                                        <div class='logdiv2'>
+                                                {{ form_label(form.document) }}
+                                                {{ form_widget(form.document) }}
+                                        </div>
+                                
+                                </div>
+                                <div class='logdivbtn'> 
+                                        <button class="btn ">{{ button_label|default('Sauvegarder') }}</button> 
+                                </div>  
+                        </div>
+                                 
+                {{ form_end(form) }}
 
-<div class="example-wrapper">
-    <h1>Hello {{ app.user.firstName }} ! ✅</h1>
-    <h1>Adding a new document</h1> 
-    {{ form_start(form) }}
-        <div >
-                <div >
-                        {{ form_label(form.title) }}
-                        {{ form_widget(form.title) }}
-                </div>
-                <div >
-                        {{ form_label(form.date) }}
-                        {{ form_widget(form.date) }}
-                </div>
-               
-                <div >
-                        {{ form_label(form.document) }}
-                        {{ form_widget(form.document) }}
-                </div>
+                        <a class="button button-primary" href="{{ path('projects_document', {'id': project.id}) }}">Retour</a>
                 
         </div>
-        <button class="btn ">{{ button_label|default('Save') }}</button>    
-    {{ form_end(form) }}
-
-        <a class="button button-primary" href="{{ path('projects_document', {'id': project.id}) }}">Cancel</a>
-  
+   </div>
 </div>
 {% endblock %}

@@ -3,38 +3,43 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+<div class="container3">
+    <div class='connexion '>
+        <h1>Create new User</h1>
 
-    {{ form_start(form, {'attr': {'id': 'new_edit_user'}}) }}
-        {# utilisation de classes bootstrap pour la mise en forme #}
-        <div >
-                <div >
-                        {{ form_label(form.email) }}
-                        {{ form_widget(form.email) }}
-                </div>
-                <div >
-                        {{ form_label(form.password) }}
-                        {{ form_widget(form.password) }}
-                </div>
+        {{ form_start(form, {'attr': {'id': 'new_edit_user'}}) }}
+                {# utilisation de classes bootstrap pour la mise en forme #}
+                <div class='Login'>
                 <div>
-                        <label for="verifpass">Saisir une seconde fois le mot de passe</label>
-                        <input type="password" id="verifpass" required>
+                        <div class='logdiv'>
+                                {{ form_label(form.email) }}
+                                {{ form_widget(form.email) }}
+                        </div>
+                        <div class='logdiv'>
+                                {{ form_label(form.password) }}
+                                {{ form_widget(form.password) }}
+                        </div>
+                        <div class='logdiv'>
+                                <label for="verifpass">Saisir une seconde fois le mot de passe</label>
+                                <input type="password" id="verifpass" required>
+                        </div>
+                        <div class='logdiv'>
+                                {{ form_label(form.first_name) }}
+                                {{ form_widget(form.first_name) }}
+                        </div>
+                        <div class='logdiv'>
+                                {{ form_label(form.last_name) }}
+                                {{ form_widget(form.last_name) }}
+                        </div>
+                        <div class='logdiv2'>
+                                {{ form_label(form.profil_picture) }}
+                                {{ form_widget(form.profil_picture) }}
+                        </div>
                 </div>
-                <div >
-                        {{ form_label(form.first_name) }}
-                        {{ form_widget(form.first_name) }}
-                </div>
-                <div >
-                        {{ form_label(form.last_name) }}
-                        {{ form_widget(form.last_name) }}
-                </div>
-                <div >
-                        {{ form_label(form.profil_picture) }}
-                        {{ form_widget(form.profil_picture) }}
-                </div>
+                <button class="btn ">{{ button_label|default('Créer') }}</button>
+        {{ form_end(form) }}
         </div>
-        <button class="btn ">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
-
+    </div>
+</div>
     
 {% endblock %}

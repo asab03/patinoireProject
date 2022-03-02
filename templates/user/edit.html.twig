@@ -3,42 +3,47 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-<div class="tableShow">
-    <h1>Edit User</h1>
-
-    {{ form_start(form, {'attr': {'id': 'new_edit_user'}}) }}
-        {# utilisation de classes bootstrap pour la mise en forme #}
-                <div >
+<div class='container4'>
+        <div class="tableShow">
+        <h1>Edit User</h1>
+        <div class='Login'>
+        {{ form_start(form, {'attr': {'id': 'new_edit_user'}}) }}
+                {# utilisation de classes bootstrap pour la mise en forme #}
                         <div >
-                                {{ form_label(form.email) }}
-                                {{ form_widget(form.email) }}
+                                <div class='logdiv'>
+                                        {{ form_label(form.email) }}
+                                        {{ form_widget(form.email) }}
+                                </div>
+                                <div class='logdiv'>
+                                        {{ form_label(form.password) }}
+                                        {{ form_widget(form.password) }}
+                                </div>
+                                <div class='logdiv'>
+                                        <label for="verifpass">Saisir une seconde fois le mot de passe</label>
+                                        <input type="password" id="verifpass" required>
+                                </div>
+                                </div>
+                                <div class='logdiv'>
+                                        {{ form_label(form.first_name) }}
+                                        {{ form_widget(form.first_name) }}
+                                </div>
+                                <div class='logdiv'>
+                                        {{ form_label(form.last_name) }}
+                                        {{ form_widget(form.last_name) }}
+                                </div>
+                                <div class='logdiv2'>
+                                        {{ form_label(form.profil_picture) }}
+                                        {{ form_widget(form.profil_picture) }}
+                                </div>
+                        <div class='logdivbtn'>        
+                        <button class="btn  ">{{ button_label|default('Mettre à jour') }}</button>
                         </div>
-                        <div >
-                                {{ form_label(form.password) }}
-                                {{ form_widget(form.password) }}
-                        </div>
-                        <div >
-                                <label for="verifpass">Saisir une seconde fois le mot de passe</label>
-                                <input type="password" id="verifpass" required>
-                        </div>
-                        </div>
-                <div >
-                        {{ form_label(form.first_name) }}
-                        {{ form_widget(form.first_name) }}
-                </div>
-                <div >
-                        {{ form_label(form.last_name) }}
-                        {{ form_widget(form.last_name) }}
-                </div>
-                <div >
-                        {{ form_label(form.profil_picture) }}
-                        {{ form_widget(form.profil_picture) }}
-                </div>
-                <button class="btn ">{{ button_label|default('Mettre à jour') }}</button>
-        {{ form_end(form) }}
+                {{ form_end(form) }}
 
-    
+        
 
-    {{ include('user/_delete_form.html.twig') }}
-    </div>
+        {{ include('user/_delete_form.html.twig') }}
+        </div>
+        </div>
+</div>     
 {% endblock %}
