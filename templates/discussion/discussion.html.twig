@@ -8,23 +8,32 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class='container4'>
+    <div class='Showdisc'>
+
     <div  class="example-wrapper">
     <h1>Hello {{ app.user.firstName }} ! ✅</h1>
+    <div class='topdisc'>
     <h2>{{project.title}}</h2>
+    <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+    </div>
     <div id ="up">
         <div id='chat'>
         {% for chatMessages in chatMessage %}
         {% if app.user == chatMessages.user %}
-        <div class="row chatMessage float-right">  
+        <div class="row chatMessage ">  
             <b>{{chatMessages.user.firstName}} : </b>
+            <div class="float-right float">
             <p> {{chatMessages.messageContent}}</p>
-            <b>{{chatMessages.sendingDate|date("d M Y")}}</b>
+            <b>{{chatMessages.sendingDate|date("d M Y H:i")}}</b>
+            </div>
         </div>  
         {% else %}
-        <div class="row  chatMessage float-left">
+        <div class="row  chatMessage2 ">
             <b>{{chatMessages.user.firstName}} : </b>
+            <div class="float-left float">
             <p>{{chatMessages.messageContent}} </p>
-            <b>{{chatMessages.sendingDate|date("d M Y H:i:s")}}</b>
+            <b>{{chatMessages.sendingDate|date("d M Y H:i")}}</b>
+            </div>
         </div>
         {% endif %}
         {% endfor %}
@@ -33,35 +42,7 @@
   
     
     <div class='discussion'>
-        {% for discussion in project.getDiscussion %}
-            <tr>
-                                
-            <td>{{ discussion.getChatMessages }}</td>
-            <div  id=id class="container bg-light h-75 overflow-auto">
-                {% for chatMessage in chatMessages %}
-                    {% if app.user == chatMessage.user %}
-                        <div class="row w-75 float-right">
-                            <b>{{ chatMessage.user.firstName }}</b>
-                            <p class="alert alert-info w-100">
-                                {{ chatMessage.messageContent }}
-                            </p>
-                        </div>
-                    {% else %}
-                        <div class="row w-75 float-left">
-                            <b>{{ ChatMessage.user.firstName }}</b>
-                            <p class="alert alert-success w-100">
-                                {{ chatMessage.messageContent }}
-                            </p>
-                        </div>
-                    {% endif %}
-
-                    <p>{{discussion.id}}</p>
-                {% endfor %}
-            </div>
-                                
-            </tr>
-            
-        {% endfor %}
+        
         <div>
             <form id="form" class="container row"> 
                 <input id="chatMessage" class="input-group-text col-sm-9" placeholder="Message" type="textarea" />
@@ -71,12 +52,13 @@
                 
             </form>
         </div>
-        <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+        
         
             
        
     </div>  
         
+    </div>
     </div>
 </div>   
 {% endblock %}
@@ -120,7 +102,7 @@
     }
     setInterval(function(){
         $( "#up" ).load(window.location.href + " #chat" );
-    }, 4000)
+    }, 5000)
 
    
     submit.addEventListener("onClick",(event)=>handleMessage(event))

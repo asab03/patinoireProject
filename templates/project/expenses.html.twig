@@ -27,7 +27,7 @@
                             </thead>
                             <tbody>
                                 {% for expense in project.getExpenses %}
-                                <tr>
+                                <tr class='formline'>
                                     
                                     <td>{{ expense.getTitle }}</td>
                                     <td>{{ expense.getDate|date("d-M-Y") }}</td>
@@ -45,8 +45,8 @@
             </form>
             
             <div class="logdivbtn">
-                    <a class="button " href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
-                    <a class="button " href="{{ path('projects_addExpense', {'id': project.id}) }}">Ajouter</a>
+                <a class="button " href="{{ path('projects_addExpense', {'id': project.id}) }}">Ajouter</a>
+                <a class="button " href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
             </div>
         
         </div>

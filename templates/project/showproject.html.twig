@@ -10,7 +10,6 @@
     <table class="table">
         <tbody>
                       
-           
             <tr>
                 <th>Description</th>
                 <td>{{ project.Description }}</td>
@@ -26,10 +25,10 @@
             
         </tbody>
     </table>
-    <div>
+    <div class='buttonProject'>
 
-    <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
-    <a href="{{ path('projects_addUser', {'id': project.id}) }}">Ajouter participant</a>
+        <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
+        <a href="{{ path('projects_addUser', {'id': project.id}) }}">Ajouter participant</a>
     </div>
     <div class="userprojectPic">
         {% for user in project.user %}

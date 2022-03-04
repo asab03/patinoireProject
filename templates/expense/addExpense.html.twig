@@ -1,27 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProjectController!{% endblock %}
+{% block title %}Voyage, Voyage!{% endblock %}
 
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ app.user.firstName }} ! ✅</h1>
-    <h1>Ajouter une nouvelle dépense</h1> 
-    
-   {{ form_start(form) }}
-        <div >
-                {{ form_row(form.title) }}
-                {{ form_row(form.amount) }}
-                {{ form_row(form.date) }}
-                {{ form_row(form.user) }}
+<div class='container4'>
+    <div class='tableShow '>
+        <div class="example-wrapper">
+            <h1>Hello {{ app.user.firstName }} ! </h1>
+            <h1>Ajouter une nouvelle dépense</h1> 
+            
+        {{ form_start(form) }}
+                <div class='Login2'>
+                    <div class='logdiv'>
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title) }}
+                    </div>
+                    <div class='logdiv'>
+                        {{ form_label(form.amount) }}
+                        {{ form_widget(form.amount) }}
+                    </div>
+                    <div class='logdiv'>
+                        {{ form_label(form.date) }}
+                        {{ form_widget(form.date) }}
+                    </div>  
+                    <div class='logdiv'>
+                        {{ form_label(form.user) }}
+                        {{ form_widget(form.user) }}
+                    </div>   
+                    <div class='logdivbtn'> 
+                        <button class="btn ">{{ button_label|default('Sauvegarder') }}</button> 
+                    </div>   
+                </div>
+                  
+            {{ form_end(form) }}
+                <a class="button button-primary" href="{{ path('projects_expense', {'id': project.id}) }}">Retour</a>
+        
         </div>
-        {# <button class="btn ">{{ button_label|default('Save') }}</button>     #}
-    {{ form_end(form) }}
-        <a class="button button-primary" href="{{ path('projects_expense', {'id': project.id}) }}">Cancel</a>
-  
+    </div>
 </div>
 {% endblock %}

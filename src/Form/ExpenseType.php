@@ -24,7 +24,9 @@ class ExpenseType extends AbstractType
 
         $builder
             ->add('title')
-            ->add('amount', MoneyType::class)
+            ->add('amount', MoneyType::class, [
+                'label' => 'Montant',
+            ])
             ->add('date', DateType::class,[
                 'widget' => 'single_text',
             ])
@@ -32,9 +34,10 @@ class ExpenseType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choices' => $project->getUser(),
+                'label' => 'Utilisateur'
             ])
            
-            ->add('save', SubmitType::class)
+            
            
         ;
     }

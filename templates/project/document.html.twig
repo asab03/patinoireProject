@@ -26,7 +26,7 @@
                         </thead>
                         <tbody>
                             {% for document in project.getDocuments %}
-                            <tr>
+                            <tr class='formline'>
                                 
                                 <td>{{ document.getTitle }}</td>
                                 <td>{{ document.getDate|date("d-M-Y") }}</td>
