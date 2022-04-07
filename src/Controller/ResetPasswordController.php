@@ -55,10 +55,11 @@ class ResetPasswordController extends AbstractController
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
+        //formulaire pour envoi du mail de reset
     }
 
     /**
-     * Confirmation page after a user has requested a password reset.
+     * Page de confirmation apres l'envoi du mail.
      *
      * @Route("/check-email", name="app_check_email")
      */
