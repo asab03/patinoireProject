@@ -97,7 +97,7 @@ class DiscussionController extends AbstractController
      */
     public function DiscussionGetMessage(DiscussionRepository $discussionRepository, Project $project, ChatMessageRepository $chatMessageRepository, Discussion $discussion): Response
     {
-        
+        //pour mercure;
         
         // $chatMessage = $discussion->getChatMessages();
 
@@ -139,7 +139,7 @@ class DiscussionController extends AbstractController
         ]);
 
        
-        return new JsonResponse( // Enfin, on retourne la réponse
+        return new JsonResponse( // Enfin, on retourne la réponse (pour Mercure)
             $jsonMessage,
             Response::HTTP_OK,
             [],

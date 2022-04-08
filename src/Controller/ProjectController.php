@@ -258,10 +258,8 @@ class ProjectController extends AbstractController
                 $document->setDocument($newFilename);
             }
             $document->setTitle($form->get('title')->getData());
-            
             $document->setDate( $form->get('date')->getData());
             $document->setProject($project);
-            
             $entityManager->persist($document);
             $entityManager->flush();
 

@@ -52,7 +52,6 @@ class ExpenseController extends AbstractController
             
             $expense->setTitle($form->get('title')->getData());
             $expense->setAmount($form->get('amount')->getData());
-            // $expense->setDate(\DateTime::createFromFormat($form->get('amount')->getData(), $format));
             $expense->setDate($form->get('date')->getData());
             $expense->setUser( $form->get('user')->getData());
             $expense->setProject($project);
@@ -62,7 +61,7 @@ class ExpenseController extends AbstractController
             $entityManager->flush();
             
 
-            // ... persist the $product variable or any other work
+            // persist the $product variable or any other work
 
             return $this->redirectToRoute('projects_expense',[
                 'id'=> $project->getId()
@@ -115,7 +114,6 @@ class ExpenseController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $entityManager->persist($expense);
-        // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
         
         return $this->redirectToRoute('projects_expense',[

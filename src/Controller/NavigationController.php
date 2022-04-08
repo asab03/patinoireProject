@@ -42,7 +42,7 @@ class NavigationController extends AbstractController
            
            
             
-            // if($users && in_array('ROLE_USER', $users->getRoles())){
+            //if($users && in_array('ROLE_USER', $users->getRoles())){
             return $this->render('navigation/home.html.twig',[
                 
                 
