@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 
 class ExpenseType extends AbstractType
@@ -24,7 +25,7 @@ class ExpenseType extends AbstractType
 
         $builder
             ->add('title')
-            ->add('amount', MoneyType::class, [
+            ->add('amount', NumberType::class, [
                 'label' => 'Montant',
             ])
             ->add('date', DateType::class,[

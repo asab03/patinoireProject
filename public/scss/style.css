@@ -20,6 +20,7 @@ section {
   min-height: 100vh;
   z-index: 0;
 }
+/*footer*/
 footer {
   display: flex;
   flex-direction: column;
@@ -49,6 +50,26 @@ footer a:hover {
   border: solid 1px rgb(250, 217, 97);
   background: none;
   color: rgb(247, 107, 28);
+}
+.contact {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 45vh;
+  width: 25vw;
+  z-index: 1;
+  margin: 5vh;
+  border-radius: 5%;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  color: black;
+}
+.contact:hover {
+  box-shadow: 10px 10px 25px rgba(247, 107, 28, 0.5);
 }
 /*navbar*/
 .navbar {
@@ -309,7 +330,7 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .oldProject {
@@ -376,6 +397,44 @@ footer a:hover {
   background: none;
   color: rgb(247, 107, 28);
 }
+
+.listUser {
+  display: flex;
+  flex-direction: column;
+}
+.tableShowFooter {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  height: 75vh;
+  width: 60vw;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  color: white;
+  z-index: 1;
+  overflow-y: scroll;
+}
+.tableShowFooter h2 {
+  margin-top: 1rem;
+  padding: 1rem;
+
+  text-decoration: none;
+}
+.tableShowFooter a:hover {
+  padding: 1rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  border: solid 1px rgb(250, 217, 97);
+  background: none;
+  color: rgb(247, 107, 28);
+}
+
 .buttonProject {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -610,4 +669,9 @@ tbody {
   border: solid 1px rgb(250, 217, 97);
   background: none;
   color: rgb(247, 107, 28);
+}
+td {
+  margin-left: 2vw;
+  align-items: center;
+  justify-content: center;
 }

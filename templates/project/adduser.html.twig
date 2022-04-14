@@ -10,40 +10,21 @@
 <div class='container4'>
   <div class='projectCard '>
     <h1>Hello {{ app.user.firstName }} !</h1>
-    <form action="/project/{{ project.getId }}/user/save" method="POST">
-        <div class="row">
-            <div class="logdiv">
-                <table class="u-full-width">
-                    <thead>
-                        <tr>
-                            <th>Select</th>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for user in users %}
-                        <tr >
-                            <td>
-                                <input type="checkbox" {% if projectUsers.contains(user) %} checked {% endif %} value={{ user.getId }} id="{{ user.getId }}" name="user_id[]">
-                            </td>
-                            <td>{{ user.getFirstName }}</td>
-                            <td>{{ user.getLastName }}</td>
-                            <td>{{ user.getEmail }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            
-        </div>
-        <div class="logdivbtn2">
-                <input class="button" type="submit" value="Sauvegarder">
-                <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+     {{ form_start(form) }}
+        {{ form_row(form.email) }}
+     {{ form_end(form) }}
+
+    {% for user in projectUsers %}
+    <div class='listUser'>  
+        <a>{{ user.getFirstName }} {{user.getLastName }}</a>
+        
+        
+    </div>
+    {% endfor %} 
+    
+     <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
                 
-        </div>
-    </form>
+       
 
    </div>
 </div>

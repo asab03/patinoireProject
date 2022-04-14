@@ -23,10 +23,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use App\Form\AddUserProject;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 
 class ProjectController extends AbstractController
 {
@@ -161,18 +166,64 @@ class ProjectController extends AbstractController
     }
     
     /**
-     * @Route("/project/{id}/user", methods={"GET"}, name="projects_addUser")
+     * @Route("/project/{id}/user",  name="projects_addUser")
      */
-    public function projectsAddUser(UserRepository $userRepository, Project $project): Response
+    public function projectsAddUser(UserRepository $userRepository, Project $project, Request $request, ManagerRegistry $doctrine,TokenGeneratorInterface $tokenGenerator, MailerInterface $mailer): Response
     {
-        $users = $userRepository->findAll();
-
+        $form = $this->createForm(AddUserProject::class);
+        $form->handleRequest($request);
+        
         $projectUsers = $project->getUser();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $donnees = $form ->getData();
+
+            $user = $userRepository-> findOneByEmail($donnees['email']);
+
+            if ($user === null) {
+                // On genere un token
+                $token = $tokenGenerator->generateToken();
+
+                // On génère l'URL pour arriver sur la page inscription
+                $url = $this->generateUrl('user_new', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+               
+                // On génère l'e-mail
+                $message =   (new Email())
+                ->from(new Address('patinoiredev7@gmail.com', 'Patinoire mail Bot'))
+                ->to($donnees['email'])
+                ->subject('Invitation a participer au projet')
+                ->html( "<h1>Bonjour,</h1><br><br>Une Invitation pour participer à un evenement vous a été envoyée. Veuillez cliquer sur le lien suivant : " . $url,)
+                ;
+
+                // On envoie l'e-mail
+                $mailer->send($message);
+
+                // On crée le message flash de confirmation
+                $this->addFlash('message', "E-mail d'invitation du mot de passe envoyé !");
+                  
+            }
+
+            
+
+            else{
+                $user = $userRepository->find($user);
+                $project->addUser($user);
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($project);
+                $entityManager->flush();
+            
+            }
+
+            return $this->redirectToRoute('projects_addUser', ['id'=> $project->getId(),]);
+
+        };
 
         return $this->render('project/addUser.html.twig', [
             'project' => $project,
-            'users' => $users,
             'projectUsers' => $projectUsers,
+            'form' => $form -> createView(),
+            
         ]);
     }
 
@@ -181,6 +232,7 @@ class ProjectController extends AbstractController
      */
     public function projectsAddUserSave(LoggerInterface $logger, ManagerRegistry $doctrine, UserRepository $userRepository, Request $request, Project $project): Response
     {
+        
         $entityManager = $doctrine->getManager();
 
         $project->clearUsers();
@@ -198,7 +250,8 @@ class ProjectController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('project_show',[
-            'id'=> $project->getId()
+            'id'=> $project->getId(),
+            
         ]);
     }
     /**
@@ -258,10 +311,8 @@ class ProjectController extends AbstractController
                 $document->setDocument($newFilename);
             }
             $document->setTitle($form->get('title')->getData());
-            
             $document->setDate( $form->get('date')->getData());
             $document->setProject($project);
-            
             $entityManager->persist($document);
             $entityManager->flush();
 

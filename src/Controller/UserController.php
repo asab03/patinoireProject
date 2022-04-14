@@ -7,6 +7,7 @@ use App\Form\ChangePasswordFormType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,9 +70,7 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        // $projectRoot = $this->getParameter('kernel.project_dir');
-        // $filename = $user-> getProfilPicture();
-        // return $this->file($projectRoot.'/public/uploads/profilPicture/'.$filename, null, ResponseHeaderBag::DISPOSITION_INLINE);
+        
         return $this->render('user/show.html.twig', [
             'user' => $user,
             
@@ -141,10 +140,12 @@ class UserController extends AbstractController
     public function ProjectUsers(User $user): Response
     {
         $projects = $user->getProjects();
-
-        return $this->render('user/projectUser.html.twig', [
-            'projects' => $projects,
-            'user' => $user,
+        $dateNow = new \DateTime("now");
+        
+            return $this->render('user/projectUser.html.twig', [
+                'projects' => $projects,
+                'user' => $user,
+                'dateNow'=> $dateNow
         ]);
     }
     /**
