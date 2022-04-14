@@ -74,12 +74,13 @@ footer a:hover {
 /*navbar*/
 .navbar {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   justify-content: space-between;
   text-align: center;
   width: 100%;
   background-color: white;
+  z-index: 10;
 }
 .landing {
   display: flex;
