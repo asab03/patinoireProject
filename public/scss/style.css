@@ -129,7 +129,7 @@ footer a:hover {
 #exit {
   background: transparent;
   margin-left: 10px;
-  transition: 0.5s ease-out;
+  transition: 0.3s ease-out;
 }
 #exit:hover {
   padding: 0.9rem;
@@ -320,7 +320,8 @@ footer a:hover {
 
 .homepage {
   display: flex;
-  background: url(../img/bgHome.jpg);
+  /*background: url(../img/bgHome.jpg);*/
+  background-color: #f1f4f9;
   background-size: 100vh;
   flex-direction: column;
   justify-content: center;
@@ -334,7 +335,7 @@ footer a:hover {
   text-align: center;
   width: max-content;
   padding: 20px;
-  margin-top: 7rem;
+  margin-top: 8rem;
   margin-bottom: 2rem;
   border-radius: 2%;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
@@ -354,6 +355,20 @@ footer a:hover {
 .navpick p {
   color: white;
   margin-left: 00.5rem;
+}
+.homepage h1 {
+  font-size: 2.5rem;
+}
+.homepage h2 {
+  font-size: 2rem;
+}
+.titres {
+  width: 90vw;
+  display: flex;
+  align-items: baseline;
+}
+.titres a {
+  margin-left: 3rem;
 }
 .activProject {
   display: flex;
@@ -406,6 +421,7 @@ footer a:hover {
   border-left: 1px solid rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(5px);
   color: white;
+  margin-top: 3rem;
   z-index: 1;
 }
 .tableShow a {
@@ -479,6 +495,7 @@ footer a:hover {
   margin-top: 0.5rem;
 }
 .logdivbtn input {
+  margin-left: 1rem;
   font-size: 1rem;
 }
 .logdivbtn button {
@@ -501,11 +518,11 @@ footer a:hover {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 45vh;
-  min-width: 25vw;
+  min-height: 60vh;
+  min-width: 28vw;
   z-index: 1;
   margin: 5vh;
-  border-radius: 5%;
+  border-radius: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   border-left: 1px solid rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(5px);
