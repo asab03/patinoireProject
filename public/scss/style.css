@@ -29,8 +29,11 @@ footer {
   align-items: center;
   height: 15vh;
   color: #dff1ff;
-  background: white;
+  background: #222222;
   padding-top: 1rem;
+}
+footer p {
+  color: white;
 }
 footer a {
   padding: 1rem;
@@ -79,7 +82,8 @@ footer a:hover {
   justify-content: space-between;
   text-align: center;
   width: 100%;
-  background-color: white;
+  background-color: #222222;
+  box-shadow: 10px 5px 5px #bcbcbc;
   z-index: 10;
 }
 .landing {
@@ -89,7 +93,7 @@ footer a:hover {
 .navbar .logo {
   height: 10vh;
 }
-.navbar a {
+.navbar .btn {
   padding: 1rem;
   width: fit-content;
   border-radius: 1rem;
@@ -100,7 +104,18 @@ footer a:hover {
   transition: 0.5s ease-out;
   margin-right: 10px;
 }
-.navbar a:hover {
+.backhome {
+  background: none;
+  border: none;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.navbar .btn:hover {
   padding: 1rem;
   border-radius: 1rem;
   text-decoration: none;
@@ -118,6 +133,10 @@ footer a:hover {
 }
 #exit:hover {
   padding: 0.9rem;
+}
+#toggler,
+.navbar label {
+  display: none;
 }
 /*fin navbar*/
 .largeur {
@@ -173,8 +192,8 @@ footer a:hover {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 35rem;
-  width: 90rem;
+  min-height: 50vh;
+  min-width: 90vw;
   padding: 3rem;
   border-radius: 0.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
@@ -326,7 +345,16 @@ footer a:hover {
   height: 5vh;
   border-radius: 50%;
 }
-
+.navpick {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+}
+.navpick p {
+  color: white;
+  margin-left: 00.5rem;
+}
 .activProject {
   display: flex;
   flex-direction: column;
@@ -474,7 +502,7 @@ footer a:hover {
   justify-content: space-evenly;
   align-items: center;
   height: 45vh;
-  width: 25vw;
+  min-width: 25vw;
   z-index: 1;
   margin: 5vh;
   border-radius: 5%;
@@ -675,4 +703,62 @@ td {
   margin-left: 2vw;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 1280px) {
+  .container1 {
+    background-size: 100% 100vh;
+  }
+  .connexion img {
+    height: auto;
+    width: 135%;
+  }
+  .connexion h2 {
+    display: none;
+  }
+  .container2 p {
+    min-width: 90vw;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .container2 img {
+    height: 30vh;
+    width: 25vw;
+  }
+  .titre2 {
+    align-self: center;
+    width: 60vw;
+  }
+  /*navbar*/
+  .landing {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+  }
+  .list {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .navbar label {
+    position: absolute;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 auto;
+    font-size: 40px;
+    color: rgb(247, 107, 28);
+  }
+  #toggler:checked ~ .landing {
+    max-height: 100%;
+    transform: translateX(0);
+  }
+  .userProject {
+    flex-direction: column;
+  }
+  .projectCard {
+    padding: 1rem;
+  }
 }
