@@ -35,8 +35,8 @@
       </div>
       
       <div class="logdivbtn">
-        <input class="button" type="submit" value="Sauvegarder">
-        <a href="{{ path('project_delete', {"id":project.id})}}"  class="button ">Supprimer</a>
+        <input class="button greenBtn" type="submit" value="Sauvegarder">
+        <a href="{{ path('project_delete', {"id":project.id})}}"  class="button  redBtn">Supprimer</a>
         <a class="button btnCancel" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
       </div>
     </form>

@@ -4,7 +4,7 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper { margin: 1em auto; max-width: 900px; width: 100%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class='container4'>
@@ -14,7 +14,7 @@
     
     <div class='topdisc'>
     <h2>{{project.title}}</h2>
-    <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+    <a class="button btn" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
     </div>
     <div id ="up">
         <div id='chat'>
@@ -100,9 +100,9 @@
         $( "#up" ).load(window.location.href + " #chat" );
 
     }
-    setInterval(function(){
+    /*setInterval(function(){
         $( "#up" ).load(window.location.href + " #chat" );
-    }, 5000)
+    }, 5000)*/
 
    
     submit.addEventListener("onClick",(event)=>handleMessage(event))

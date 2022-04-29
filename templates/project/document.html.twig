@@ -31,8 +31,8 @@
                                 <td>{{ document.getTitle }}</td>
                                 <td>{{ document.getDate|date("d-M-Y") }}</td>
                                 
-                                <td><a href="{{ path('project_document_show', {'id': project.id, 'doc_id': document.id}) }}">Voir</a></td>
-                                <td><a href="{{ path('document_delete', {"id":project.id, "document_id":document.id})}}">Supprimer</a></td>
+                                <td><a href="{{ path('project_document_show', {'id': project.id, 'doc_id': document.id}) }}" >Voir</a></td>
+                                <td><a href="{{ path('document_delete', {"id":project.id, "document_id":document.id})}}" class="btnRed">Supprimer</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -41,8 +41,8 @@
                 
             </div>
             <div class="logdivbtn">
-                <a class="button button-primary" href="{{ path('projects_addDocument', {'id': project.id}) }}">Ajouter</a>
-                <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+                <a class="button button-primary greenBtn" href="{{ path('projects_addDocument', {'id': project.id}) }}">Ajouter</a>
+                <a class="button button-primary back" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
             </div>
         
         </form>

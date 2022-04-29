@@ -687,6 +687,7 @@ tbody {
   background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));
   color: #f1f4f9;
   transition: 0.5s ease-out;
+  font-size: 1rem;
 }
 .topdisc a:hover {
   padding: 1rem;
@@ -950,7 +951,7 @@ td {
   }
 
   .projectCard form {
-    height: 100%;
+    height: 80%;
     font-size: 2rem;
   }
 
@@ -970,6 +971,7 @@ td {
     font-size: 2rem;
   }
   /*project*/
+
   .tableShow {
     min-width: 85vw;
   }
@@ -991,5 +993,191 @@ td {
   }
   .fct h3 {
     display: none;
+  }
+
+  /*Edit Project*/
+  .logdivbtn {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-areas: "a b c";
+  }
+  .logdivbtn .greenBtn {
+    grid-area: a;
+    background: green;
+    border: none;
+    padding-right: 6rem;
+    cursor: pointer;
+  }
+  .logdivbtn .redBtn {
+    grid-area: b;
+    background: red;
+    border: none;
+  }
+  .logdivbtn .btnCancel {
+    grid-area: c;
+  }
+  /*Add user to project*/
+
+  .addUser form {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    width: 100%;
+  }
+  .addUser form input {
+    width: 70%;
+    height: 3rem;
+    font-size: 1.5rem;
+    border: 3px solid lightsalmon;
+    border-radius: 10px;
+  }
+  .addUser form button {
+    background: green;
+    border: none;
+    padding: 1rem;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  .listUser a {
+    font-size: 1.7rem;
+  }
+  /*Documents*/
+  th {
+    font-size: 2rem;
+  }
+  .tableShow a {
+    font-size: 2 rem;
+  }
+  tbody {
+    height: 4.5rem;
+  }
+  .tableShow .greenBtn {
+    background: green;
+    border: none;
+    padding: 1rem;
+    font-size: 2rem;
+  }
+  .tableShow .back {
+    padding: 1rem;
+    font-size: 2rem;
+    border: solid 1px rgb(250, 217, 97);
+  }
+  .tableShow .btnRed {
+    background: red;
+  }
+
+  /*chat*/
+
+  .topdisc h2 {
+    font-size: 3rem;
+  }
+  .topdisc a {
+    font-size: 2 rem;
+  }
+  .example-wrapper {
+    max-width: 900px;
+  }
+  .Showdisc {
+    width: 100%;
+  }
+  #chat {
+    width: 100%;
+  }
+  .chatMessage {
+    margin-left: 40vw;
+    font-size: 2rem;
+    width: 40vw;
+  }
+  .chatMessage2 {
+    font-size: 2rem;
+    width: 40vw;
+  }
+  .float {
+    font-size: 2rem;
+    width: 40vw;
+  }
+  .float b {
+    font-size: 1.3rem;
+  }
+
+  .discussion form input {
+    font-size: 2rem;
+  }
+  .discussion form #submit {
+    font-size: 1.5rem;
+    background: green;
+    border: none;
+  }
+
+  /*User*/
+  .Login h2 {
+    font-size: 2rem;
+  }
+
+  .divBtnUser {
+    display: grid;
+    grid-template-areas: "a b c";
+    grid-gap: 2vw;
+  }
+  .divBtnUser a {
+    font-size: 1.5rem;
+    background: green;
+  }
+  .divBtnUser form .red {
+    background: red;
+  }
+  .logdivbtn .btnGreen {
+    background: green;
+    border: none;
+  }
+  .logdivbtn .red {
+    background: red;
+    border: none;
+  }
+
+  .editPass form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 80%;
+  }
+  .logdivpass {
+    height: 12vh;
+  }
+  #change_password_form_plainPassword {
+    height: 100%;
+  }
+
+  #change_password_form_plainPassword div {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    align-items: center;
+    width: 80vw;
+  }
+  #change_password_form_plainPassword input {
+    width: 60%;
+    border: 3px solid lightsalmon;
+  }
+
+  /*Contact Page*/
+  .contact {
+    min-width: 80vw;
+  }
+  .contact h1 {
+    font-size: 3rem;
+  }
+  .contact p {
+    font-size: 2rem;
+  }
+
+  /*Mentions*/
+
+  .tableShowFooter {
+    min-width: 100vw;
+    background: none;
+    box-shadow: none;
   }
 }

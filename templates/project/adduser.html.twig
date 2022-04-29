@@ -8,10 +8,11 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class='container4'>
-  <div class='projectCard '>
+  <div class='projectCard addUser'>
     <h1>Ajouter un utilisateur au projet</h1>
      {{ form_start(form) }}
-        {{ form_row(form.email) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
      {{ form_end(form) }}
 
     {% for user in projectUsers %}

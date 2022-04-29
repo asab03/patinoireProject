@@ -33,7 +33,7 @@
                                     <td>{{ expense.getDate|date("d-M-Y") }}</td>
                                     <td>{{ expense.getAmount}} €</td>
                                     <td>{{ expense.getUser }}</td>
-                                    <td><a href="{{ path('expense_delete', {"id":project.id, "expense_id":expense.id})}}"  class=" button">Supprimer</a></td>
+                                    <td><a href="{{ path('expense_delete', {"id":project.id, "expense_id":expense.id})}}"  class=" button btnRed">Supprimer</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -45,8 +45,8 @@
             </form>
             
             <div class="logdivbtn">
-                <a class="button " href="{{ path('projects_addExpense', {'id': project.id}) }}">Ajouter</a>
-                <a class="button " href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
+                <a class="button greenBtn" href="{{ path('projects_addExpense', {'id': project.id}) }}" >Ajouter</a>
+                <a class="button back" href="{{ path('project_show', {'id': project.id}) }}" >Retour</a>
             </div>
         
         </div>
