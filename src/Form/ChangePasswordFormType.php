@@ -18,7 +18,7 @@ class ChangePasswordFormType extends AbstractType
     {
         $builder
             ->add('old_password', PasswordType::class,[
-                'label' => 'mot de passe actuel',
+                'label' => 'Mot de passe actuel',
                 'mapped'=> false,
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -33,16 +33,16 @@ class ChangePasswordFormType extends AbstractType
                         ]),
                         new Length([
                             'min' => 6,
-                            'minMessage' => 'Your password should be at least {{ limit }} characters',
+                            'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} characters',
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'New password',
+                    'label' => 'Nouveau mot de passe',
                 ],
                 'second_options' => [
                     'attr' => ['autocomplete' => 'new-password'],
-                    'label' => 'Repeat Password',
+                    'label' => 'Repeter le mot de passe',
                 ],
                 'invalid_message' => 'Les mots de passe doivent etre identiques.',
                 // Instead of being set onto the object directly,

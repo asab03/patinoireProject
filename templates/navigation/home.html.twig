@@ -9,7 +9,7 @@
 </style>
 <div class='homepage'>
     <div class='accueil'>
-        <h1>Bienvenue sur Voyage, Voyage !</h1>
+        
         <h2>Bonjour {{ app.user.firstName }}  </h2>
     </div>
     <div class='activProject '>
@@ -34,10 +34,10 @@
             {% endfor %}
         </div>
         <div class='oldProject'>
-            <div class=''>
+            <div class='titres'>
                 <h2> Vos anciens projets </h2>
             </div>
-        <div class="userProject">
+        <div class="userProject UP2">
     
             {% for project in app.user.projects %}
                 {% if project.getDateOut < date('Now')%}
@@ -59,7 +59,7 @@
 {% block javascripts %}
 <script type="text/javascript" src="/js/vanilla-tilt.js"></script>
 <script>
-    VanillaTilt.init(document.querySelector(".accueil"), {
+    VanillaTilt.init(document.querySelector(""), {
 		max: 15,
 		speed: 100,
         glare : true,
