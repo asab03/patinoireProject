@@ -21,19 +21,33 @@
         {% for chatMessages in chatMessage %}
         {% if app.user == chatMessages.user %}
         <div class="row chatMessage ">  
-            <b>{{chatMessages.user.firstName}} : </b>
+            <div class='chatPicture'>
+            {% if chatMessages.user.getProfilPicture %}
+                <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
+            {% else %}
+                <img src='/img/profil.png' class="profilPic">
+            {% endif %}
+            </div>
             <div class="float-right float">
             <p> {{chatMessages.messageContent}}</p>
+            </div>
+            <div class='chatPicture'>
             <b>{{chatMessages.sendingDate|date("d M Y H:i")}}</b>
             </div>
         </div>  
         {% else %}
         <div class="row  chatMessage2 ">
-            <b>{{chatMessages.user.firstName}} : </b>
+            <div class='chatPicture'>
+            {% if chatMessages.user.getProfilPicture %}
+                <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
+            {% else %}
+                <img src='/img/profil.png' class="profilPic">
+            {% endif %}
+            </div>
             <div class="float-left float">
             <p>{{chatMessages.messageContent}} </p>
-            <b>{{chatMessages.sendingDate|date("d M Y H:i")}}</b>
             </div>
+            <b>{{chatMessages.sendingDate|date("d M Y H:i")}}</b>
         </div>
         {% endif %}
         {% endfor %}
@@ -100,9 +114,9 @@
         $( "#up" ).load(window.location.href + " #chat" );
 
     }
-    /*setInterval(function(){
+    setInterval(function(){
         $( "#up" ).load(window.location.href + " #chat" );
-    }, 5000)*/
+    }, 50000)
 
    
     submit.addEventListener("onClick",(event)=>handleMessage(event))
