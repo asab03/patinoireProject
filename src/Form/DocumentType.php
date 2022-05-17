@@ -18,7 +18,9 @@ class DocumentType extends AbstractType {
      {
         $builder
             // ...
-            ->add('title')
+            ->add('title', TextType::class,[
+                'label' => 'Titre',
+                ])
             ->add('date', DateType::class,[
                 'widget' => 'single_text',
             ])

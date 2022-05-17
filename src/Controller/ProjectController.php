@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Project;
+use App\Entity\User;
 use App\Repository\DiscussionRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\ProjectRepository;
@@ -162,7 +163,7 @@ class ProjectController extends AbstractController
         
         $entityManager->flush();
 
-        return $this->redirectToRoute('projects');
+        return $this->redirectToRoute('home');
     }
     
     /**
@@ -200,7 +201,7 @@ class ProjectController extends AbstractController
                 $mailer->send($message);
 
                 // On crée le message flash de confirmation
-                $this->addFlash('message', "E-mail d'invitation du mot de passe envoyé !");
+                $this->addFlash('message', "E-mail d'invitation au projet envoyé !");
                   
             }
 
@@ -253,6 +254,31 @@ class ProjectController extends AbstractController
             'id'=> $project->getId(),
             
         ]);
+    }
+     /**
+     * @Route("/project/{id}/user/remove/{user_id}", name="project_remove_user", methods={"GET", "DELETE"})
+     * @ParamConverter("user", options={"id" = "user_id"})
+     */
+    public function removeUser(Request $request, User $user, ManagerRegistry $doctrine, Project $project): Response
+    {
+        $users = $project->getUser();
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+
+        if($users === null){
+            $entityManager = $doctrine->getManager();
+            $entityManager->remove($project);
+        
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->redirectToRoute('home');
+        
     }
     /**
      * @Route("/project/{id}/document", methods={"GET"}, name="projects_document")

@@ -16,11 +16,11 @@
             </tr>
             <tr>
                 <th>Date de début</th>
-                <td>{{project.getDateIn|date("d M Y")}}</td>
+                <td>{{project.getDateIn|date("d/m/Y")}}</td>
             </tr>
             <tr>
                 <th>Date de fin</th>
-                <td>{{ project.getDateOut|date("d M Y") }}</td>
+                <td>{{ project.getDateOut|date("d/m/Y") }}</td>
             </tr>
             
         </tbody>
@@ -29,6 +29,7 @@
 
         <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
         <a href="{{ path('projects_addUser', {'id': project.id}) }}">Ajouter participant</a>
+        {#<a class="button button-primary btnRed" href="{{ path('project_remove_user', {"id":project.id, "user_id":app.user.id}) }}" >Quitter le projet</a>#}
     </div>
     <div class="userprojectPic">
         {% for user in project.user %}

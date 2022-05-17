@@ -2,14 +2,17 @@
 
 namespace App\Form;
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType ;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class AddUserProject extends AbstractType
+class AdminEmail extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -22,6 +25,8 @@ class AddUserProject extends AbstractType
                     ]),
                 ],
             ])
+            ->add('subject')
+            ->add('body', TextareaType::class)
             ->add('Envoyer', SubmitType::class)
         ;
     }

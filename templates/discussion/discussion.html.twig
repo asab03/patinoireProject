@@ -18,39 +18,39 @@
     </div>
     <div id ="up">
         <div id='chat'>
-        {% for chatMessages in chatMessage %}
-        {% if app.user == chatMessages.user %}
-        <div class="row chatMessage ">  
-            <div class='chatPicture'>
-            {% if chatMessages.user.getProfilPicture %}
-                <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
+            {% for chatMessages in chatMessage %}
+            {% if app.user == chatMessages.user %}
+            <div class="row chatMessage ">  
+                <div class='chatPicture'>
+                {% if chatMessages.user.getProfilPicture %}
+                    <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
+                {% else %}
+                    <img src='/img/profil.png' class="profilPic">
+                {% endif %}
+                </div>
+                <div class="float-right float">
+                <p> {{chatMessages.messageContent}}</p>
+                </div>
+                <div class='chatPicture'>
+                <b>{{chatMessages.sendingDate|date("d/m/Y H:i")}}</b>
+                </div>
+            </div>  
             {% else %}
-                <img src='/img/profil.png' class="profilPic">
+            <div class="row  chatMessage2 ">
+                <div class='chatPicture'>
+                {% if chatMessages.user.getProfilPicture %}
+                    <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
+                {% else %}
+                    <img src='/img/profil.png' class="profilPic">
+                {% endif %}
+                </div>
+                <div class="float-left float">
+                <p>{{chatMessages.messageContent}} </p>
+                </div>
+                <b>{{chatMessages.sendingDate|date("d/m/Y H:i")}}</b>
+            </div>
             {% endif %}
-            </div>
-            <div class="float-right float">
-            <p> {{chatMessages.messageContent}}</p>
-            </div>
-            <div class='chatPicture'>
-            <b>{{chatMessages.sendingDate|date("d M Y H:i")}}</b>
-            </div>
-        </div>  
-        {% else %}
-        <div class="row  chatMessage2 ">
-            <div class='chatPicture'>
-            {% if chatMessages.user.getProfilPicture %}
-                <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
-            {% else %}
-                <img src='/img/profil.png' class="profilPic">
-            {% endif %}
-            </div>
-            <div class="float-left float">
-            <p>{{chatMessages.messageContent}} </p>
-            </div>
-            <b>{{chatMessages.sendingDate|date("d M Y H:i")}}</b>
-        </div>
-        {% endif %}
-        {% endfor %}
+            {% endfor %}
         </div>
     </div>
   
@@ -116,7 +116,7 @@
     }
     setInterval(function(){
         $( "#up" ).load(window.location.href + " #chat" );
-    }, 50000)
+    }, 5000)
 
    
     submit.addEventListener("onClick",(event)=>handleMessage(event))

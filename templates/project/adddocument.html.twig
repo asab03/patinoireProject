@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Add Document{% endblock %}
+{% block title %}Ajout de document{% endblock %}
 
 {% block body %}
 <style>
@@ -11,7 +11,7 @@
     <div class='tableShow '>
         <div class="example-wrapper">
                 <h1>Hello {{ app.user.firstName }} ! </h1>
-                <h1>Adding a new document</h1> 
+                <h1>Ajouter un nouveau document</h1> 
                 {{ form_start(form) }}
                         <div class='Login2'>
                                 <div >
@@ -36,8 +36,9 @@
                         </div>
                                  
                 {{ form_end(form) }}
-
-                        <a class="button button-primary" href="{{ path('projects_document', {'id': project.id}) }}">Retour</a>
+                        <div class='logdivbtn'>
+                        <a class=" button button-primary" href="{{ path('projects_document', {'id': project.id}) }}">Retour</a>
+                        </div>
                 
         </div>
    </div>

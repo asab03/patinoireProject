@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Envoyer Email à l'utilisateur{% endblock %}
+
+{% block body %}
+<div class='container4'>
+    <div class="tableShow">
+
+        <h1>Message à l'utilisateur</h1>
+        <div class='Login editPass'>
+        {{ form_start(form) }}
+              <div class='logdiv'>
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                </div>
+                <div class='logdivpass'>
+                    {{ form_label(form.subject) }}
+                    {{ form_widget(form.subject) }}
+                </div>
+                <div class='logdivpass'>
+                    {{ form_label(form.body) }}
+                    {{ form_widget(form.body) }}
+                </div>
+                <div class='logdivbtn'>
+                    <button class="btnGreen btn">{{ button_label|default('Envoyer') }}</button>
+                </div>
+        {{ form_end(form) }}
+        </div>
+         
+    
+    </div>
+</div>
+{% endblock %}

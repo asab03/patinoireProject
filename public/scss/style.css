@@ -189,9 +189,9 @@ footer a:hover {
   height: 100vh;
 }
 .accueil h2 {
-  text-transform: uppercase;
-  font-family: "Cinzel", sans-serif;
-  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  font-weight: 1000;
+  font-variant: small-caps;
   font-size: 1rem;
 }
 .connexion {
@@ -210,6 +210,13 @@ footer a:hover {
   backdrop-filter: blur(5px);
   color: white;
   z-index: 2;
+}
+.tableAdmin {
+  width: 100%;
+  margin-bottom: 10vh;
+}
+.tableAdmin tr {
+  margin-bottom: 2vh;
 }
 .Login {
   display: flex;
@@ -374,7 +381,7 @@ footer a:hover {
   padding: 20px;
   margin-top: 8rem;
   margin-bottom: 2rem;
-  border-radius: 2%;
+  border-radius: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   border-left: 1px solid rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(5px);
@@ -768,7 +775,8 @@ tbody {
   width: 20px;
 }
 #chat .row b {
-  font-size: 0.5rem;
+  font-size: 0.6rem;
+  color: #525252;
 }
 
 .discussion {

@@ -17,8 +17,8 @@
      {% for project in app.user.projects %}
         <h2>{{project.getTitle}}</h2>
         <p>{{project.getDescription}}</p>
-        <p>{{project.getDateIn|date("d M Y")}}</p>
-        <p>{{project.getDateOut|date("d M Y")}}</p>
+        <p>{{project.getDateIn|date("d/m/Y")}}</p>
+        <p>{{project.getDateOut|date("d/m/Y")}}</p>
         <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
      {% endfor %}
 </div>

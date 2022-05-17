@@ -26,8 +26,8 @@
                 <div class="projectCard">
                     <h3>{{project.getTitle}}</h3>
                     <p>{{project.getDescription}}</p>
-                    <p>{{project.getDateIn|date("d M Y")}}</p>
-                    <p>{{project.getDateOut|date("d M Y")}}</p>
+                    <p>{{project.getDateIn|date("d/m/Y")}}</p>
+                    <p>{{project.getDateOut|date("d/m/Y")}}</p>
                     <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
                 </div>
                 {% endif %}
@@ -44,8 +44,8 @@
                 <div class="projectCard">
                     <h3>{{project.getTitle}}</h3>
                     <p>{{project.getDescription}}</p>
-                    <p>{{project.getDateIn|date("d M Y")}}</p>
-                    <p>{{project.getDateOut|date("d M Y")}}</p>
+                    <p>{{project.getDateIn|date("d/m/Y")}}</p>
+                    <p>{{project.getDateOut|date("d/m/Y")}}</p>
                     <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
                 </div>
                 {% endif %}

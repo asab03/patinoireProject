@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ExpenseType extends AbstractType
 {
@@ -24,7 +24,9 @@ class ExpenseType extends AbstractType
         $project = $options['project'];
 
         $builder
-            ->add('title')
+            ->add('title', TextType::class,[
+                'label' => 'Titre',
+            ])
             ->add('amount', NumberType::class, [
                 'label' => 'Montant',
             ])

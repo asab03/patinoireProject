@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Administrateur{% endblock %}
 
 {% block body %}
 <div>
     <h2>Liste des Utilisateurs</h2>
 
-    <table class="table">
+    <table class="tableAdmin">
         <thead>
             <tr>
                 <th>Id</th>
@@ -31,7 +31,8 @@
                 <td>{{ user.profilPicture }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">Voir</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
+                    {{ include('user/_delete_form.html.twig') }}
+                    {#<a href="{{path("admin_mail_send")}}"> Email</a>#}
                 </td>
             </tr>
         {% else %}
@@ -47,7 +48,7 @@
     <div>
         <h2>Liste des Projets</h2>
 
-        <table class="table">
+        <table class="tableAdmin">
         <thead>
             <tr>
                 <th>Id</th>
@@ -70,12 +71,12 @@
                 
                 <td>
                     <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
-                    <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
+                    <a href="{{ path('project_delete', {'id': project.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">Aucun projects trouvés</td>
+                <td colspan="8">Aucun projets trouvés</td>
             </tr>
         {% endfor %}
         </tbody>
