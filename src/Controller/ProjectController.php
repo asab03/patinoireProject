@@ -256,7 +256,7 @@ class ProjectController extends AbstractController
         ]);
     }
      /**
-     * @Route("/project/{id}/user/remove/{user_id}", name="project_remove_user", methods={"GET", "DELETE"})
+     * @Route("/project/{id}/user/{user_id}", name="project_remove_user", methods={"GET", "DELETE"})
      * @ParamConverter("user", options={"id" = "user_id"})
      */
     public function removeUser(Request $request, User $user, ManagerRegistry $doctrine, Project $project): Response
@@ -264,7 +264,7 @@ class ProjectController extends AbstractController
         $users = $project->getUser();
 
         $entityManager = $doctrine->getManager();
-        $entityManager->remove($user);
+        $project->removeUser($user);
         $entityManager->flush();
 
 

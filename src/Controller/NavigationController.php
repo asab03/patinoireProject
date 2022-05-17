@@ -113,7 +113,7 @@ class NavigationController extends AbstractController
             }
 
         return $this->render('user/adminEmail.html.twig',[
-                'form' => $form ,
+                'form' => $form-> createView(),
                 
 
             ]) ;

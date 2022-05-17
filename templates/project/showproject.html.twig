@@ -29,7 +29,7 @@
 
         <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
         <a href="{{ path('projects_addUser', {'id': project.id}) }}">Ajouter participant</a>
-        {#<a class="button button-primary btnRed" href="{{ path('project_remove_user', {"id":project.id, "user_id":app.user.id}) }}" >Quitter le projet</a>#}
+        <a class="button button-primary btnRed" href="{{ path('project_remove_user', {"id":project.id, "user_id":app.user.id}) }}" >Quitter le projet</a>
     </div>
     <div class="userprojectPic">
         {% for user in project.user %}
