@@ -105,6 +105,10 @@ footer a:hover {
   transition: 0.5s ease-out;
   margin-right: 10px;
 }
+.navbar .menu-icon {
+  display: none;
+}
+
 .backhome {
   display: flex;
   flex-direction: row;
@@ -143,10 +147,7 @@ footer a:hover {
 #exit:hover {
   padding: 0.9rem;
 }
-#toggler,
-.navbar label {
-  display: none;
-}
+
 /*fin navbar*/
 .largeur {
   width: 100%;
@@ -865,7 +866,7 @@ td {
   text-align: center;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   * {
     overflow-x: hidden;
   }
@@ -904,26 +905,88 @@ td {
     overflow: hidden;
   }
   .list {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     padding: 20px;
   }
-  .navbar label {
-    position: absolute;
-    right: 60px;
-    top: 60px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  .navbar .menu-icon {
     cursor: pointer;
-    margin: 0 auto;
-    font-size: 40px;
-    color: rgb(247, 107, 28);
+    display: inline-block;
+    float: right;
+    padding: 10px 20px;
+    position: absolute;
+    right: 70px;
+    top: 50px;
+    user-select: none;
   }
-  #toggler:checked ~ .landing {
-    max-height: 100%;
-    transform: translateX(0);
+  .navbar .menu-icon .navicon {
+    background: orange;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background 0.2s ease-out;
+    width: 25px;
   }
+
+  .navbar .menu-icon .navicon:before,
+  .navbar .menu-icon .navicon:after {
+    background: orange;
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all 0.2s ease-out;
+    width: 100%;
+  }
+
+  .navbar .menu-icon .navicon:before {
+    top: 5px;
+  }
+
+  .navbar .menu-icon .navicon:after {
+    top: -5px;
+  }
+  /* menu btn */
+
+  .navbar .menu-btn {
+    display: none;
+  }
+
+  .navbar .menu-btn:checked ~ .landing {
+    max-height: 240px;
+  }
+
+  .navbar .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+  }
+
+  .navbar .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+  }
+
+  .navbar .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+  }
+
+  .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+  .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+  }
+  .navbar .btn {
+    border: solid 2px rgb(250, 217, 97);
+  }
+  .navbar .exitPic {
+    height: 2vh;
+  }
+  .navbar li a {
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  .navbar .profilPic {
+    height: 3vh;
+  }
+
   .userProject {
     flex-direction: column;
   }

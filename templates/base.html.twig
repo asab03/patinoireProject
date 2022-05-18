@@ -17,29 +17,30 @@
         <section>
                 <nav class='navbar'>    
                                 <a class="backhome " href="{{ path('home') }}"><img src='/img/logo.png' class="logo"><p>Voyage Voyage</p></a>
-                                <input types="checkbox" id="toggler">
-                                <label for="toggler">☰</label>
+                                <input type="checkbox" id="toggler" class="menu-btn">
+                                <label class='menu-icon' for="toggler"><span class='navicon'</span></label>
                                 {% if app.user %}
                                         <div class='landing'>
                                         {# Si l'utilisateur est authentifié #}
                                                 <ul class="list">
 
-                                                {% if app.user.getProfilPicture %}
-                                                       <li><a class="navpick" href="{{ path('user_show', {"id":app.user.id}) }}"><img src='/uploads/profilPicture/{{ app.user.profilPicture }}' class="profilPic"> <p>{{ app.user.firstName }}</p></a></li>
-                                                {% else %}
-                                                        <li><a class="navpick" href="{{ path('user_show', {"id":app.user.id}) }}"><img src='/img/profil.png' class="profilPic"></a></li>
-                                                {% endif %}
-                                         {% if is_granted('ROLE_ADMIN') %}
-                                                {# Si l'utilisateur est authentifié et qu'il est admin #}
-                                                <li><a class="btn " href="{{ path('index') }}">Page admin</a></li>
-                                        {% endif %}
-                                                <a id='exit' class="btn"  href="{{ path('app_logout') }}"><img src='/img/logout.png' class="exitPic"></a>
-                                        </div>
+                                                        {% if app.user.getProfilPicture %}
+                                                                <li><a class="navpick" href="{{ path('user_show', {"id":app.user.id}) }}"><img src='/uploads/profilPicture/{{ app.user.profilPicture }}' class="profilPic"> <p>{{ app.user.firstName }}</p></a></li>
+                                                        {% else %}
+                                                                <li><a class="navpick" href="{{ path('user_show', {"id":app.user.id}) }}"><img src='/img/profil.png' class="profilPic"></a></li>
+                                                        {% endif %}
+                                                        {% if is_granted('ROLE_ADMIN') %}
+                                                        {# Si l'utilisateur est authentifié et qu'il est admin #}
+                                                                <li><a class="btn " href="{{ path('index') }}">Page admin</a></li>
+                                                        {% endif %}
+                                                </ul>
+                                                        <a id='exit' class="btn"  href="{{ path('app_logout') }}"><img src='/img/logout.png' class="exitPic"></a>
+                                                </div>
                                 {% else %}
                                         <div class='landing'>
                                                 <ul class="list">
-                                                <li><a class="btn" href="{{ path('user_new') }}">S'inscrire</a></li>
-                                                <li><a class="btn" href="{{ path('app_login') }}">Se connecter</a><li>
+                                                        <li><a class="btn" href="{{ path('user_new') }}">S'inscrire</a></li>
+                                                        <li><a class="btn" href="{{ path('app_login') }}">Se connecter</a><li>
                                                 </ul>
                                         </div>
                                 {% endif %}
