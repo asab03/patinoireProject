@@ -3,7 +3,7 @@
 {% block title %}Administrateur{% endblock %}
 
 {% block body %}
-<div>
+<div class="adminPage">
     <h2>Liste des Utilisateurs</h2>
 
     <table class="tableAdmin">
@@ -12,11 +12,11 @@
                 <th>Id</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Password</th>
-                <th>First_name</th>
-                <th>Last_name</th>
-                <th>Profil_picture</th>
-                <th>actions</th>
+                
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Image de profil</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,12 +25,18 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
+               
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
-                <td>{{ user.profilPicture }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">Voir</a>
+                {% if user.getProfilPicture %}
+                    <img src='/uploads/profilPicture/{{ user.profilPicture }}' class="profilPic">
+                {% else %}
+                    <img src='/img/profil.png' class="profilPic">
+                {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">Voir</a> 
                     {{ include('user/_delete_form.html.twig') }}
                     <a href="{{path("admin_mail_send")}}"> Email</a>
                 </td>
@@ -65,7 +71,7 @@
             <tr>
                 <td>{{ project.id }}</td>
                 <td>{{ project.title }}</td>
-                <td>{{ project.description }}</td>
+                <td class='adminProjDesc'>{{ project.description }}</td>
                 <td>{{ project.getDateIn|date("d-M-Y")}}</td>
                 <td>{{ project.getDateOut|date("d-M-Y") }}</td>
                 
