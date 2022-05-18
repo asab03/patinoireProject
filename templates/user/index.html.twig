@@ -36,9 +36,9 @@
                 {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">Voir</a> 
+                    <a href="{{ path('user_show', {'id': user.id}) }}" class='btnShow bttn'>Voir</a> 
                     {{ include('user/_delete_form.html.twig') }}
-                    <a href="{{path("admin_mail_send")}}"> Email</a>
+                    <a href="{{path("admin_mail_send")}}" class 'btnMail bttn'> Email</a>
                 </td>
             </tr>
         {% else %}
@@ -49,9 +49,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Nouvel utilisateur</a>
-    </div>
-    <div>
+    <a href="{{ path('user_new') }}" class='addNewUser'>Nouvel utilisateur</a>
+</div>
+<div class="adminPage" >
         <h2>Liste des Projets</h2>
 
         <table class="tableAdmin">
@@ -72,12 +72,12 @@
                 <td>{{ project.id }}</td>
                 <td>{{ project.title }}</td>
                 <td class='adminProjDesc'>{{ project.description }}</td>
-                <td>{{ project.getDateIn|date("d-M-Y")}}</td>
-                <td>{{ project.getDateOut|date("d-M-Y") }}</td>
+                <td>{{ project.getDateIn|date("d/m/Y")}}</td>
+                <td>{{ project.getDateOut|date("d/m/Y") }}</td>
                 
                 <td>
-                    <a href="{{ path('project_show', {'id': project.id}) }}">Voir</a>
-                    <a href="{{ path('project_delete', {'id': project.id}) }}">Supprimer</a>
+                    <a href="{{ path('project_show', {'id': project.id}) }}" class='btnShow bttn'>Voir</a>
+                    <a href="{{ path('project_delete', {'id': project.id}) }}" class ='btnDelete bttn'>Supprimer</a>
                 </td>
             </tr>
         {% else %}
@@ -87,5 +87,5 @@
         {% endfor %}
         </tbody>
     </table>
-    </div>
+</div>
 {% endblock %}

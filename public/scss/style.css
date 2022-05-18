@@ -151,6 +151,11 @@ footer a:hover {
 .largeur {
   width: 100%;
 }
+.pagePassword {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 .container1 {
   display: flex;
   align-items: center;
@@ -647,6 +652,22 @@ footer a:hover {
   font-size: 1.2rem;
   color: #525252;
 }
+/*MOt de passe oublié*/
+.passWord {
+  display: flex;
+  justify-content: center;
+}
+.passWord button {
+  font-size: 1rem;
+  padding: 1rem;
+  background: green;
+  border-radius: 10px;
+  color: white;
+}
+.passWord form input {
+  border: 1px solid lightsalmon;
+  border-radius: 10px;
+}
 
 .userProject {
   display: flex;
@@ -848,7 +869,9 @@ td {
   * {
     overflow-x: hidden;
   }
+
   /*accueil*/
+
   .container1 {
     background-size: 100% 100vh;
   }
@@ -872,7 +895,9 @@ td {
     align-self: center;
     width: 60vw;
   }
+
   /*navbar*/
+
   .landing {
     width: 100%;
     max-height: 0;
@@ -917,7 +942,9 @@ td {
   .container2 p {
     font-size: 1.5rem;
   }
+
   /*Footer*/
+
   footer {
     justify-content: space-evenly;
     height: 20vh;
@@ -929,6 +956,7 @@ td {
   footer p {
     font-size: 1.5rem;
   }
+
   /*connexion*/
 
   .Login h1 {
@@ -950,6 +978,32 @@ td {
   .connexion a {
     font-size: 1.5rem;
   }
+
+  /* Mot de passe Oublié */
+
+  .passWord {
+    display: flex;
+    justify-content: center;
+  }
+  .passWord h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+  .passWord form input {
+    font-size: 1.5rem;
+  }
+  .passWord .small {
+    margin: 1rem;
+  }
+
+  .passWord button {
+    font-size: 2rem;
+    padding: 1rem;
+    background: green;
+    border-radius: 10px;
+    color: white;
+  }
+
   /*Inscription*/
 
   .connexion {
@@ -965,7 +1019,9 @@ td {
   .connexion h1 {
     font-size: 3rem;
   }
+
   /*Homepage*/
+
   .homepage {
     margin-top: 20rem;
   }
@@ -984,7 +1040,7 @@ td {
     align-items: flex-start;
   }
   .projectCard {
-    min-height: 40vh;
+    min-height: 50vh;
     min-width: 80vw;
   }
   .projectCard h3 {
@@ -1004,6 +1060,7 @@ td {
   .oldProject {
     min-height: 80vh;
   }
+
   /*New Project*/
 
   .container4 h1 {
@@ -1030,6 +1087,7 @@ td {
   .projectCard form .button {
     font-size: 2rem;
   }
+
   /*project*/
 
   .tableShow {
@@ -1042,7 +1100,7 @@ td {
     font-size: 2rem;
   }
   .buttonProject {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     padding: 1rem;
   }
   .fct {
@@ -1056,6 +1114,7 @@ td {
   }
 
   /*Edit Project*/
+
   .logdivbtn {
     display: grid;
     grid-gap: 1rem;
@@ -1076,6 +1135,7 @@ td {
   .logdivbtn .btnCancel {
     grid-area: c;
   }
+
   /*Add user to project*/
 
   .addUser form {
@@ -1103,7 +1163,12 @@ td {
   .listUser a {
     font-size: 1.7rem;
   }
+
   /*Documents*/
+
+  .tableShow .example-wrapper {
+    width: 100%;
+  }
   th {
     font-size: 2rem;
   }
@@ -1128,6 +1193,49 @@ td {
     background: red;
   }
 
+  /* Add Document & Expense*/
+
+  .Login2 {
+    height: 35vh;
+  }
+  .Login2 .logdiv {
+    height: 8vh;
+  }
+
+  .Login2 .logdiv label {
+    font-size: 2rem;
+    margin-bottom: 1vh;
+  }
+  .Login2 .logdiv input {
+    width: 70%;
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
+    border: 3px solid lightsalmon;
+  }
+  .Login2 .logdiv2 {
+    height: 8vh;
+  }
+  .Login2 .logdiv2 label {
+    font-size: 2rem;
+    margin-bottom: 1vh;
+  }
+  .Login2 .logdiv2 input {
+    width: 70%;
+    font-size: 1.4rem;
+    margin-bottom: 1vh;
+  }
+  .Login2 .logdivbtn button {
+    font-size: 2rem;
+    background: green;
+  }
+  .logdivbtn a {
+    font-size: 2rem;
+  }
+  .logdiv select {
+    font-size: 2rem;
+    padding: 5px;
+  }
+
   /*chat*/
 
   .topdisc h2 {
@@ -1137,7 +1245,7 @@ td {
     font-size: 2 rem;
   }
   .example-wrapper {
-    max-width: 900px;
+    width: 100%;
   }
   .Showdisc {
     width: 100%;
@@ -1247,5 +1355,55 @@ td {
     min-width: 100vw;
     background: none;
     box-shadow: none;
+  }
+
+  /* Admin */
+
+  .adminPage {
+    margin-bottom: 4vh;
+  }
+  .adminPage h2 {
+    font-size: 2rem;
+  }
+  .tableAdmin {
+    margin-bottom: 5vh;
+  }
+  .tableAdmin th {
+    font-size: 1.5rem;
+  }
+  .tableAdmin td {
+    font-size: 1.2rem;
+  }
+  .tableAdmin .profilPic {
+    height: 4vh;
+  }
+
+  .adminPage a {
+    font-size: 1.5rem;
+  }
+  .adminPage .bttn {
+    padding: 0.9rem;
+    border-radius: 10px;
+    color: white;
+  }
+  .adminPage .btnShow {
+    background: green;
+  }
+  .adminPage .btnDelete {
+    background: red;
+  }
+  .adminPage .btnMail {
+    background: blue;
+  }
+  .adminPage button {
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin: 0.3rem;
+    color: White;
+    background: red;
+    border-radius: 10px;
+  }
+  .adminPage .addNewUser {
+    margin-bottom: 2rem;
   }
 }
