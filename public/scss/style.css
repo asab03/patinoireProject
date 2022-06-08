@@ -147,6 +147,9 @@ footer a:hover {
 #exit:hover {
   padding: 0.9rem;
 }
+#toggler {
+  display: none;
+}
 
 /*fin navbar*/
 .largeur {
@@ -878,7 +881,7 @@ td {
   }
   .connexion img {
     height: auto;
-    width: 135%;
+    width: 115%;
   }
   .connexion h2 {
     display: none;
@@ -913,63 +916,44 @@ td {
     cursor: pointer;
     display: inline-block;
     float: right;
-    padding: 10px 20px;
+    padding: 40px 20px;
     position: absolute;
-    right: 70px;
+    right: 30px;
     top: 50px;
     user-select: none;
   }
   .navbar .menu-icon .navicon {
     background: orange;
     display: block;
-    height: 2px;
+    height: 3px;
     position: relative;
-    transition: background 0.2s ease-out;
-    width: 25px;
+    transition: 0.2s ease-out;
+    width: 35px;
+    margin-bottom: 7px;
   }
-
-  .navbar .menu-icon .navicon:before,
-  .navbar .menu-icon .navicon:after {
-    background: orange;
-    content: "";
-    display: block;
-    height: 100%;
-    position: absolute;
-    transition: all 0.2s ease-out;
-    width: 100%;
-  }
-
-  .navbar .menu-icon .navicon:before {
-    top: 5px;
-  }
-
-  .navbar .menu-icon .navicon:after {
-    top: -5px;
-  }
-  /* menu btn */
 
   .navbar .menu-btn {
     display: none;
   }
 
   .navbar .menu-btn:checked ~ .landing {
-    max-height: 240px;
+    max-height: 100%;
   }
 
-  .navbar .menu-btn:checked ~ .menu-icon .navicon {
+  .navbar .menu-btn:checked ~ .menu-icon .navicon:nth-child(2) {
     background: transparent;
   }
 
-  .navbar .menu-btn:checked ~ .menu-icon .navicon:before {
-    transform: rotate(-45deg);
+  .navbar .menu-btn:checked ~ .menu-icon .navicon:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 9px);
   }
 
-  .navbar .menu-btn:checked ~ .menu-icon .navicon:after {
-    transform: rotate(45deg);
+  .navbar .menu-btn:checked ~ .menu-icon .navicon:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -9px);
   }
 
-  .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-  .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:nth-child(1),
+  .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:nth-child(3) {
     top: 0;
   }
   .navbar .btn {
@@ -1005,6 +989,7 @@ td {
   .container2 p {
     font-size: 1.5rem;
   }
+  /* menu btn */
 
   /*Footer*/
 

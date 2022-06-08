@@ -33,7 +33,7 @@
                                     <td>{{ expense.getDate|date("d/m/Y") }}</td>
                                     <td>{{ expense.getAmount}} €</td>
                                     <td>{{ expense.getUser }}</td>
-                                    <td><a href="{{ path('expense_delete', {"id":project.id, "expense_id":expense.id})}}"  class=" button btnRed">Supprimer</a></td>
+                                    <td><a href="{{ path('expense_delete', {"id":project.id, "expense_id":expense.id})}}"  class=" button btnRed" onclick="validDelete()">Supprimer</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

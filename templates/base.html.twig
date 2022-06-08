@@ -18,7 +18,11 @@
                 <nav class='navbar'>    
                                 <a class="backhome " href="{{ path('home') }}"><img src='/img/logo.png' class="logo"><p>Voyage Voyage</p></a>
                                 <input type="checkbox" id="toggler" class="menu-btn">
-                                <label class='menu-icon' for="toggler"><span class='navicon'</span></label>
+                                <label class='menu-icon' for="toggler">
+                                        <span class='navicon'></span>
+                                        <span class='navicon'></span>
+                                        <span class='navicon'></span>
+                                </label>
                                 {% if app.user %}
                                         <div class='landing'>
                                         {# Si l'utilisateur est authentifié #}
@@ -70,6 +74,14 @@
                 crossorigin="anonymous">
             </script>
             <script src="/js/script.js"></script>
+            <script>
+                function validDelete(e) {
+                        var result =  confirm("Etes vous sur de vouloir supprimer cet élément");
+                        if (result == false){
+                                e.preventDefault
+                        }
+                }
+            </script>
         {% endblock %}
     </body>
 </html>
