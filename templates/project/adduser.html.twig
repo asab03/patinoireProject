@@ -15,13 +15,13 @@
         {{ form_widget(form.email) }}
      {{ form_end(form) }}
 
-    {% for user in projectUsers %}
+    
     <div class='listUser'>  
+    {% for user in projectUsers %}
         <a>{{ user.getFirstName }} {{user.getLastName }}</a>
-        
-        
+      {% endfor %} 
     </div>
-    {% endfor %} 
+    
     
      <a class="button button-primary" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
      

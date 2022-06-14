@@ -37,8 +37,9 @@
                                                         {# Si l'utilisateur est authentifié et qu'il est admin #}
                                                                 <li><a class="btn " href="{{ path('index') }}">Page admin</a></li>
                                                         {% endif %}
+                                                         <a id='exit' class="btn"  href="{{ path('app_logout') }}"><img src='/img/logout.png' class="exitPic"></a>
                                                 </ul>
-                                                        <a id='exit' class="btn"  href="{{ path('app_logout') }}"><img src='/img/logout.png' class="exitPic"></a>
+                                                       
                                                 </div>
                                 {% else %}
                                         <div class='landing'>
@@ -61,7 +62,7 @@
                         
         </section>
         <footer>
-        <div>
+        <div class='footerBtn'>
         <a class="btn" href="{{ path('contact') }}">Contact</a>
         <a class="btn" href="{{ path('mentions') }}">Mentions Legales</a>
         </div>

@@ -919,7 +919,7 @@ td {
     padding: 40px 20px;
     position: absolute;
     right: 30px;
-    top: 50px;
+    top: 25px;
     user-select: none;
   }
   .navbar .menu-icon .navicon {
@@ -967,6 +967,10 @@ td {
     padding: 1rem;
     border-radius: 10px;
   }
+  .navbar li a:first-child {
+    background: none;
+    border: none;
+  }
   .navbar .profilPic {
     height: 3vh;
   }
@@ -997,9 +1001,15 @@ td {
     justify-content: space-evenly;
     height: 20vh;
   }
+  .footerBtn {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+  }
   footer a {
-    font-size: 2.5rem;
-    padding: 1rem;
+    font-size: 2.3rem;
+    padding: 0.2rem;
   }
   footer p {
     font-size: 1.5rem;
@@ -1083,7 +1093,7 @@ td {
     font-size: 2rem;
   }
   .userProject {
-    flex-direction: row;
+    flex-direction: column;
     overflow-x: scroll;
     align-items: flex-start;
   }
@@ -1102,8 +1112,8 @@ td {
     padding: 1.5rem 3rem;
   }
   .UP2 {
-    margin-left: 100vw;
     overflow-x: scroll;
+    flex-direction: column;
   }
   .oldProject {
     min-height: 80vh;
@@ -1277,7 +1287,7 @@ td {
     background: green;
   }
   .logdivbtn a {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .logdiv select {
     font-size: 2rem;
@@ -1360,6 +1370,9 @@ td {
     background: red;
     border: none;
   }
+  .logdiv td {
+    font-size: 1.7rem;
+  }
 
   .editPass form {
     display: flex;
@@ -1367,8 +1380,8 @@ td {
     justify-content: space-around;
     height: 80%;
   }
-  .logdivpass {
-    height: 12vh;
+  .logdivpass{
+    height: 15vh;
   }
   #change_password_form_plainPassword {
     height: 100%;
@@ -1420,7 +1433,7 @@ td {
     font-size: 1.5rem;
   }
   .tableAdmin td {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   .tableAdmin .profilPic {
     height: 4vh;
@@ -1453,5 +1466,389 @@ td {
   }
   .adminPage .addNewUser {
     margin-bottom: 2rem;
+  }
+}
+
+/*Tablette vertical*/
+@media screen and (min-width: 809px) and (max-width: 1079px) {
+  .navbar .logo {
+    width: 16vw;
+  }
+  .homepage {
+    margin-top: 10rem;
+  }
+  .projectCard {
+    height: 60vh;
+  }
+  .logdiv {
+    height: 9vh;
+  }
+  .Login {
+    height: 65vh;
+  }
+  .buttonProject {
+    height: 7vh;
+  }
+  .fct {
+    height: 20vh;
+  }
+  .tableShowFooter {
+    min-height: 100vh;
+    margin-top: 15vh;
+  }
+  td {
+    font-size: 1.4rem;
+  }
+  .Showdisc {
+    height: 90vh;
+  }
+  .float {
+    font-size: 1rem;
+  }
+  .discussion form input {
+    font-size: 1.5rem;
+  }
+}
+
+/*Tablette horizontale*/
+@media screen and (min-width: 1080px) and (max-width: 1279px) {
+  /*navbar*/
+  nav {
+    height: 17vh;
+  }
+  .navbar .logo {
+    width: 12vw;
+    height: 14vh;
+  }
+  .navbar li a {
+    font-size: 1.5rem;
+  }
+  .navbar .list .btn:first-child {
+    padding: unset;
+  }
+  .navbar .exitPic {
+    height: 4vh;
+  }
+  .landing {
+    justify-content: center;
+  }
+
+  /*Inscription*/
+
+  .connexion {
+    margin-top: 15vh;
+  }
+  .connexion h1 {
+    font-size: 2rem;
+  }
+  .Login {
+    min-height: 60vh;
+  }
+  .Login .logdiv {
+    height: 8vh;
+  }
+  .Login .logdiv label {
+    font-size: 1.5rem;
+  }
+  .Login .logdiv input {
+    font-size: 1.3rem;
+  }
+  .Login .logdiv2 {
+    height: 8vh;
+  }
+  .Login .logdiv2 label {
+    font-size: 1.5rem;
+  }
+  .Login .logdiv2 input {
+    font-size: 1.3rem;
+  }
+  .Login button {
+    font-size: 1.5rem;
+  }
+
+  /* Reset Password*/
+
+  .passWord h1 {
+    font-size: 2rem;
+  }
+  .passWord form label {
+    font-size: 1.5rem;
+  }
+  .passWord small {
+    font-size: 1.5rem;
+  }
+  .passWord button {
+    font-size: 1.5rem;
+  }
+
+  /*Homepage*/
+
+  .homepage {
+    margin-top: 10rem;
+  }
+  .titres h2 {
+    font-size: 3rem;
+  }
+  .titres a {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+  }
+
+  .userProject {
+    flex-direction: row;
+    margin-left: 10vw;
+    overflow-x: scroll;
+  }
+  .projectCard {
+    min-height: 55vh;
+    min-width: 50vw;
+  }
+  .projectCard h3 {
+    font-size: 2rem;
+  }
+  .projectCard p {
+    font-size: 1.5rem;
+  }
+  .projectCard a {
+    font-size: 1.5rem;
+  }
+
+  /*nouveau projet*/
+
+  .container4 h1 {
+    font-size: 2rem;
+    margin-top: 10vh;
+    height: 6vh;
+  }
+  .projectCard form {
+    height: 100%;
+  }
+  .projectCard .logdiv {
+    height: 10vh;
+  }
+  .projectCard .logdiv label {
+    font-size: 1.5rem;
+  }
+  .projectCard .logdiv input {
+    font-size: 1rem;
+  }
+  .projectCard .logdiv textarea {
+    font-size: 1rem;
+  }
+  .projectCard .logdivbtn .button {
+    font-size: 1.5rem;
+  }
+  .projectCard .logdivbtn .greenBtn {
+    padding-right: 4.5rem;
+  }
+
+  /*Project Page*/
+
+  .tableShow {
+    margin-top: 12vh;
+  }
+  .tableShow h1 {
+    margin-top: 0;
+  }
+  .tableShow table th {
+    font-size: 1.5rem;
+  }
+  .tableShow table td {
+    font-size: 1rem;
+  }
+  .tableShow .buttonProject a {
+    font-size: 1.3rem;
+  }
+  .fct {
+    height: 18vh;
+  }
+
+  /*Add user*/
+
+  .addUser {
+    margin-top: 15vh;
+    height: 70vh;
+  }
+  .addUser h1 {
+    margin-top: 0;
+    font-size: 2rem;
+    height: 10vh;
+  }
+  .addUser form label {
+    font-size: 1.5rem;
+  }
+  .addUser form input {
+    height: 5vh;
+  }
+  .addUser form button {
+    font-size: 1.5rem;
+  }
+  .listUser a {
+    font-size: 1rem;
+    padding: 0;
+    height: 5vh;
+  }
+
+  .addUser .button {
+    height: 8vh;
+    padding: 0.5rem;
+  }
+
+  /*Documents & Dépenses */
+
+  .tableShow .u-full-width {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .tableShow .u-full-width thead {
+    display: flex;
+    align-items: center;
+    width: 95%;
+  }
+  .tableShow .u-full-width thead tr {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+  }
+  .tableShow .u-full-width tbody {
+    width: 95%;
+  }
+  .tableShow .u-full-width tbody tr {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+  .formline td {
+    margin-left: 0;
+  }
+  .formline td a {
+    padding: 0.1rem;
+    border-radius: 5px;
+  }
+  .tableShow .greenBtn {
+    font-size: 1.5rem;
+  }
+  .tableShow .back {
+    font-size: 1.5rem;
+  }
+  /* add Documents & Add Expenses*/
+  .addDoc {
+    height: 85vh;
+  }
+  .addDoc .Login2 {
+    height: 40vh;
+  }
+  .addDoc .logdiv label {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+  .addDoc .logdiv input {
+    font-size: 1rem;
+  }
+  .addDoc .logdiv2 label {
+    font-size: 1rem;
+  }
+  .addDoc .logdiv2 input {
+    font-size: 1rem;
+  }
+  .addDoc .logdiv select {
+    font-size: 1rem;
+  }
+  .addDoc .Login2 .logdivbtn button {
+    font-size: 1.5rem;
+  }
+
+  /*Discussion*/
+  .Showdisc {
+    height: 100vh;
+    margin-top: 10vh;
+  }
+  .topdisc {
+    height: 13vh;
+  }
+  .topdisc h2 {
+    font-size: 2rem;
+  }
+  .topdisc a {
+    padding: 0.2rem;
+    border-radius: 5px;
+  }
+  .chatMessage {
+    height: 20vh;
+  }
+  .chatMessage2 {
+    height: 20vh;
+  }
+  .float {
+    font-size: 1rem;
+  }
+  .chatMessage img {
+    height: 30px;
+    width: 30px;
+  }
+  .chatMessage2 img {
+    height: 30px;
+    width: 30px;
+  }
+  #chat .row b {
+    font-size: 0.7rem;
+  }
+  .discussion {
+    height: 18vh;
+  }
+  .discussion #form input {
+    font-size: 1rem;
+  }
+  .discussion form #submit {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  /*Admin*/
+
+  .adminPage {
+    margin-top: 20vh;
+  }
+  .tableAdmin {
+    padding
+  }
+  /*User*/
+
+  .tableUser {
+    height: 80vh;
+  }
+  .tableUser .profilPic {
+    height: 30px;
+  }
+
+  /* Edit User */
+  .tableEditUser {
+    height: 86vh;
+  }
+  .tableEditUser .Login {
+    height: 90vh;
+  }
+  /*Edit Password*/
+  .tableEditPassword{
+    height: 80vh;
+  }
+  .editPass .logdiv label{
+    font-size: 1rem;
+  }
+  .logdivpass{
+    height: 15vh;
+  }
+  .tableEditPassword label{
+    font-size: 1rem;
+    
+  }
+
+  /*Footer*/
+
+  footer a {
+    font-size: 1.5rem;
   }
 }
