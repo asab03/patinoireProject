@@ -171,8 +171,8 @@ class ProjectController extends AbstractController
      */
     public function projectsAddUser(UserRepository $userRepository, Project $project, Request $request, ManagerRegistry $doctrine,TokenGeneratorInterface $tokenGenerator, MailerInterface $mailer): Response
     {
-        $form = $this->createForm(AddUserProject::class);
-        $form->handleRequest($request);
+        $form = $this->createForm(AddUserProject::class); //on recupere le formulaire AddUserProject
+        $form->handleRequest($request); //handlerequest permet de gerer le traitement du formulaire
         
         $projectUsers = $project->getUser();
 
@@ -314,26 +314,24 @@ class ProjectController extends AbstractController
             
             $documentFile = $form->get('document')->getData();
 
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
+            // Le fichier PDF doit etre traité uniquement lors du téléchargement
             if ($documentFile) {
                 $originalFilename = pathinfo($documentFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
+                // nécessaire pour inclure en toute sécurité le nom du fichier dans l'URL
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$documentFile->guessExtension();
 
-                // Move the file to the directory where brochures are stored
+                // Place le fichier dans le bon répertoire
                 try {
                     $documentFile->move(
                         $this->getParameter('document_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                    // ... On attrape l'exception si quelque chose se passe pendant le chargement du fichier
                 }
 
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
+                // On initialise un nouveau document
                 $document->setDocument($newFilename);
             }
             $document->setTitle($form->get('title')->getData());
@@ -342,7 +340,7 @@ class ProjectController extends AbstractController
             $entityManager->persist($document);
             $entityManager->flush();
 
-            // ... persist the $product variable or any other work
+            // persist l'entité document avec le nouveau fichier
 
             return $this->redirectToRoute('projects_document',[
                 'id'=> $project->getId()

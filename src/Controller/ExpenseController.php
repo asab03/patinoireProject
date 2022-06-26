@@ -23,9 +23,9 @@ class ExpenseController extends AbstractController
      */
     public function projectsExpenses(ExpenseRepository $expenseRepository, Project $project): Response
     {
-        $expense = $expenseRepository->findAll();
+        $expense = $expenseRepository->findAll(); // on recherche les dépenses
 
-        $projectexpenses = $project->getExpenses();
+        $projectexpenses = $project->getExpenses(); // on recherche les dépenses liées au projet
 
         return $this->render('project/expenses.html.twig', [
             'project' => $project,
@@ -61,7 +61,7 @@ class ExpenseController extends AbstractController
             $entityManager->flush();
             
 
-            // persist the $product variable or any other work
+            // persiste la depense dans la bdd
 
             return $this->redirectToRoute('projects_expense',[
                 'id'=> $project->getId()

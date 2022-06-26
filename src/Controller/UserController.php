@@ -88,26 +88,24 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('profil_picture')->getData();
 
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
+            // L'image doit etre traité uniquement lors du téléchargement
             if ($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
 
-                // Move the file to the directory where brochures are stored
+                // Place l'image dans le bon répertoire
                 try {
                     $imageFile->move(
                         $this->getParameter('image_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                    
                 }
 
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
+                // mise à jour de l'image de profil
                 $user->setProfilPicture($newFilename);
             }
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
