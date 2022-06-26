@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\File;
 
 class UserType extends AbstractType
@@ -15,10 +17,17 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('password', PasswordType::class)
-            ->add('first_name')
-            ->add('last_name')
+            ->add('email', EmailType::class)
+            ->add('password', PasswordType::class, [
+                'label'=> 'Mot de passe'
+                
+            ])
+            ->add('first_name', TextType::class,[
+                'label' => 'Prenom',
+            ])
+            ->add('last_name', TextType::class,[
+                'label' => 'Nom',
+            ])
             ->add('profil_picture', FileType::class,[
                 'label' => 'Image de profil (Jpg/Png)',
 

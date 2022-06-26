@@ -10,69 +10,67 @@
 <div class='container4'>
     <div class='Showdisc'>
 
-    <div  class="example-wrapper">
-    
-    <div class='topdisc'>
-    <h2>{{project.title}}</h2>
-    <a class="button btn" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
-    </div>
-    <div id ="up">
-        <div id='chat'>
-            {% for chatMessages in chatMessage %}
-            {% if app.user == chatMessages.user %}
-            <div class="row chatMessage ">  
-                <div class='chatPicture'>
-                {% if chatMessages.user.getProfilPicture %}
-                    <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
-                {% else %}
-                    <img src='/img/profil.png' class="profilPic">
-                {% endif %}
-                </div>
-                <div class="float-right float">
-                <p> {{chatMessages.messageContent}}</p>
-                </div>
-                <div class='chatPicture'>
-                <b>{{chatMessages.sendingDate|date("d/m/Y H:i")}}</b>
-                </div>
-            </div>  
-            {% else %}
-            <div class="row  chatMessage2 ">
-                <div class='chatPicture'>
-                {% if chatMessages.user.getProfilPicture %}
-                    <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
-                {% else %}
-                    <img src='/img/profil.png' class="profilPic">
-                {% endif %}
-                </div>
-                <div class="float-left float">
-                <p>{{chatMessages.messageContent}} </p>
-                </div>
-                <b>{{chatMessages.sendingDate|date("d/m/Y H:i")}}</b>
+        <div  class="example-wrapper">
+        
+            <div class='topdisc'>
+                <h2>{{project.title}}</h2>
+                <a class="button btn" href="{{ path('project_show', {'id': project.id}) }}">Retour</a>
             </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-  
+            <div id ="up">
+                <div id='chat'>
+                    {% for chatMessages in chatMessage %}
+                    {# Message de l'utilisateur connecté #}
+                    {% if app.user == chatMessages.user %}
+                    <div class="row chatMessage ">  
+                        <div class='chatPicture'>
+                        {% if chatMessages.user.getProfilPicture %}
+                            <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
+                        {% else %}
+                            <img src='/img/profil.png' class="profilPic">
+                        {% endif %}
+                        </div>
+                        <div class="float-right float">
+                        <p> {{chatMessages.messageContent}}</p>
+                        </div>
+                        <div class='chatPicture'>
+                        <b>{{chatMessages.sendingDate|date("d/m/Y H:i")}}</b>
+                        </div>
+                    </div>  
+                    {# Message des autres utilisateurs #}
+                    {% else %}
+                    <div class="row  chatMessage2 ">
+                        <div class='chatPicture'>
+                        {% if chatMessages.user.getProfilPicture %}
+                            <img src='/uploads/profilPicture/{{ chatMessages.user.profilPicture }}' class="profilPic">
+                        {% else %}
+                            <img src='/img/profil.png' class="profilPic">
+                        {% endif %}
+                        </div>
+                        <div class="float-left float">
+                        <p>{{chatMessages.messageContent}} </p>
+                        </div>
+                        <b>{{chatMessages.sendingDate|date("d/m/Y H:i")}}</b>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
     
-    <div class='discussion'>
-        
-        <div>
-            <form id="form" class="container row"> 
-                <input id="chatMessage" class="input-group-text col-sm-9" placeholder="Message" type="textarea" />
-                <input id="discussionID" value='{{app.request.get('disc_id')}}' class="input-group-text col-sm-9"  type="hidden" />
-                <input id="projectID" value='{{app.request.get('id')}}' class="input-group-text col-sm-9"  type="hidden" />
-                <button id="submit" class="btn btn-success col-sm-3" type="submit" onClick={handleMessage(event)}>Envoyer</button>
+            {# Formulaire d'envoi de message #}
+            <div class='discussion'>
                 
-            </form>
-        </div>
-        
-        
+                <div>
+                    <form id="form" class="container row"> 
+                        <input id="chatMessage" class="input-group-text col-sm-9" placeholder="Message" type="textarea" />
+                        <input id="discussionID" value='{{app.request.get('disc_id')}}' class="input-group-text col-sm-9"  type="hidden" />
+                        <input id="projectID" value='{{app.request.get('id')}}' class="input-group-text col-sm-9"  type="hidden" />
+                        <button id="submit" class="btn btn-success col-sm-3" type="submit" onClick={handleMessage(event)}>Envoyer</button>     
+                    </form>
+                </div>
+
+            </div>  
             
-       
-    </div>  
-        
-    </div>
+        </div>
     </div>
 </div>   
 {% endblock %}

@@ -18,8 +18,7 @@
                         <thead>
                             <tr>
                                 <th>Titre</th>
-                                <th>Date</th>
-                                
+                                <th>Date</th> 
                                 <th>Document</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -30,7 +29,6 @@
                                 
                                 <td>{{ document.getTitle }}</td>
                                 <td>{{ document.getDate|date("d/m/Y") }}</td>
-                                
                                 <td><a href="{{ path('project_document_show', {'id': project.id, 'doc_id': document.id}) }}" >Voir</a></td>
                                 <td><a href="{{ path('document_delete', {"id":project.id, "document_id":document.id})}}" class="btnRed">Supprimer</a></td>
                             </tr>

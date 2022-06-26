@@ -115,14 +115,14 @@ class DiscussionController extends AbstractController
     {
         $data = \json_decode($request->getContent(), true); // On récupère les data postées et on les déserialize
         if (empty($content = $data['content'])) {
-            throw new AccessDeniedHttpException('No data sent');
+            throw new AccessDeniedHttpException('Aucune donnée envoyée');
         }
 
         $discussion = $discussionRepository->findOneBy([
             'id' => $data['discussion'] // On cherche à savoir de quelle discussion provient le message
         ]);
         if (!$discussion) {
-            throw new AccessDeniedHttpException('Message have to be sent on a specific discussion');
+            throw new AccessDeniedHttpException('Votre message doit correspondre à une discussion');
         }
         
         $chatMessage = new ChatMessage(); // Après validation, on crée le nouveau message

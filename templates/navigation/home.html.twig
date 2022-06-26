@@ -19,6 +19,7 @@
             {#<a href="{{ path('projects') }}">Voir vos Projets</a>#}
 
         </div>
+        {# affichage des projets en cours #}
         <div class="userProject">
     
             {% for project in app.user.projects %}
@@ -37,6 +38,8 @@
             <div class='titres'>
                 <h2> Vos anciens projets </h2>
             </div>
+
+        {# affichage des projets terminés #}
         <div class="userProject UP2">
     
             {% for project in app.user.projects %}

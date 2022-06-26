@@ -75,7 +75,9 @@ footer a:hover {
 .contact:hover {
   box-shadow: 10px 10px 25px rgba(247, 107, 28, 0.5);
 }
+
 /*navbar*/
+
 .navbar {
   display: flex;
   position: fixed;
@@ -152,6 +154,7 @@ footer a:hover {
 }
 
 /*fin navbar*/
+
 .largeur {
   width: 100%;
 }
@@ -202,6 +205,9 @@ footer a:hover {
   font-weight: 1000;
   font-variant: small-caps;
   font-size: 1rem;
+}
+.inscription{
+  height: 70vh;
 }
 .connexion {
   background: rgba(255, 255, 255, 0.5);
@@ -319,7 +325,29 @@ footer a:hover {
   height: 6vh;
   width: 70vw;
   margin-bottom: auto;
+}.editPass form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80%;
 }
+
+#change_password_form_plainPassword {
+  height: 100%;
+}
+
+#change_password_form_plainPassword div {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  align-items: center;
+  width: 80vw;
+}
+#change_password_form_plainPassword input {
+  width: 60%;
+  border: 3px solid lightsalmon;
+}
+
 #change_password_form_plainPassword {
   display: flex;
   flex-direction: column;
@@ -332,7 +360,9 @@ footer a:hover {
   border-radius: 10px;
   border: 1px solid lightsalmon;
 }
-
+.editPass .logdivbtn{
+  margin-top: 6.5rem;
+}
 .logdiv input {
   width: 25%;
   height: 4vh;
@@ -363,7 +393,7 @@ footer a:hover {
 .logdiv2 input {
   width: 25%;
   height: 4vh;
-
+  border-radius: 0;
   border: none;
 }
 .connexion img {
@@ -396,6 +426,7 @@ footer a:hover {
   border-radius: 10px;
   box-shadow: 10px 10px 25px rgba(247, 107, 28, 0.5);
 }
+
 
 /*Fin page de connexion et inscription*/
 
@@ -656,7 +687,9 @@ footer a:hover {
   font-size: 1.2rem;
   color: #525252;
 }
-/*MOt de passe oublié*/
+
+/*Mot de passe oublié*/
+
 .passWord {
   display: flex;
   justify-content: center;
@@ -867,6 +900,30 @@ td {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+/*add User*/
+.addUser form input{
+  border: 3px solid lightsalmon;
+  border-radius: 10px;
+  height: 3vh;
+  width: 20vw;
+}
+.addUser form button{
+  padding: 1rem;
+  border: solid 1px rgb(250, 217, 97);
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));
+  font-size: 1.5rem;
+}
+.addUser form button{
+  padding: 1rem;
+  border: solid 1px rgb(250, 217, 97);
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(rgb(250, 217, 97), rgb(247, 107, 28));
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 1279px) {

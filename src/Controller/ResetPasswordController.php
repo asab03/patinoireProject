@@ -54,17 +54,13 @@ class ResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $donnees = $form ->getData();
-
             $user = $users-> findOneByEmail($donnees['email']);
-
             if ($user === null) {
                 // On envoie une alerte disant que l'adresse e-mail est inconnue
-                $this->addFlash('danger', 'Cette adresse e-mail est inconnue');
-                
+                $this->addFlash('danger', 'Cette adresse e-mail est inconnue'); 
                 // On retourne sur la page de connexion
                 return $this->redirectToRoute('app_login');
             }
-
             $token = $tokenGenerator->generateToken();
 
             try{
@@ -76,7 +72,6 @@ class ResetPasswordController extends AbstractController
                 $this->addFlash('warning', $e->getMessage());
                 return $this->redirectToRoute('app_login');
             }
-
             // On génère l'URL de réinitialisation de mot de passe
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
@@ -97,8 +92,6 @@ class ResetPasswordController extends AbstractController
             // On redirige vers la page de login
             return $this->redirectToRoute('app_login');
         };
-
-        
         // On envoie le formulaire à la vue
         return $this->render('reset_password/request.html.twig',['requestForm' => $form->createView()]);
 

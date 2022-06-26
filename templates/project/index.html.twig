@@ -9,10 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Projects {{ app.user.firstName }} ! ✅</h1>
+    <h1>Projets de {{ app.user.firstName }} ! ✅</h1>
 
   <div>
-    <h1>Vos Projets</h1>
+    <h2>Vos Projets</h2>
     <a href="{{ path('project_add') }}">Créer un nouveau projet</a>
      {% for project in app.user.projects %}
         <h2>{{project.getTitle}}</h2>
